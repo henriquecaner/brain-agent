@@ -8,15 +8,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [1.1.0] - 2026-03-15
 
 ### Added
-- 🔄 **Post-execution sync workflow** — `.agents/workflows/post-execution-sync.md` automatically analyzes changes and updates Brain docs & Skills after complex tasks
-- 📊 **Architecture diagram** — Mermaid flowchart in README showing the full task lifecycle including the sync loop
+- 🚀 **`install.sh`** — Non-interactive install script, safe to pipe from `curl`. Copies only `Brain/` and `.agents/` to project root
+- 🛡️ **Self-detection guard** — Install script blocks execution if run from inside the template repo itself
+- 🛡️ **Overwrite protection** — Install script aborts if `Brain/` or `.agents/` already exist
+- 🔄 **Post-execution sync workflow** — `.agents/workflows/post-execution-sync.md` auto-syncs Brain docs after complex tasks
+- 📊 **Architecture diagram** — Mermaid flowchart in README showing the full task lifecycle
 
 ### Changed
-- 📖 **README.md** — Upgraded from "3 Pillars" to "4 Pillars" with new Workflows section, updated directory tree
-- 📖 **SETUP_GUIDE.md** — Added workflows to mental model, onboarding checklist, day-to-day usage, and troubleshooting
-- 📖 **CUSTOMIZATION.md** — Updated workflows section with post-execution-sync reference and registration tip
-- 🔧 **setup.sh** — Granular copy output now lists rules/skills/workflows separately, added sync workflow to next-steps
+- 📖 **README.md** — Complete rewrite: simplified install (curl one-liner), clear Antigravity-only initialization with `⚠️ CAUTION` alert, day-to-day usage section
 - ⚖️ **universal-agent-rules.md** — Added Step 7 (Sync) to "Do Work" loop and routing entry for post-execution-sync
+
+### Removed
+- 🗑️ **`setup.sh`** — Replaced by `install.sh`. Interactive setup caused installation path bugs
+- 🗑️ **`SETUP_GUIDE.md`** — Content merged into README to reduce confusion
 
 ## [1.0.0] - 2026-03-15
 

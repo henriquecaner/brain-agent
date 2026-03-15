@@ -12,7 +12,7 @@
 
 <br/>
 
-[Setup Guide](./SETUP_GUIDE.md) · [Customization](./CUSTOMIZATION.md) · [Upgrade](./UPGRADE.md) · [Contributing](./CONTRIBUTING.md) · [Changelog](./CHANGELOG.md)
+[Customization](./CUSTOMIZATION.md) · [Upgrade](./UPGRADE.md) · [Contributing](./CONTRIBUTING.md) · [Changelog](./CHANGELOG.md)
 
 </div>
 
@@ -22,7 +22,8 @@
 
 - [The Problem](#-the-problem-ai-amnesia)
 - [The Solution](#-the-aha-solution-project-native-memory)
-- [Quick Start](#-setup-guide-2-minutes)
+- [Install (1 Minute)](#-install-1-minute)
+- [Initialize (Inside Antigravity)](#-initialize-inside-antigravity)
 - [How It Works](#%EF%B8%8F-how-it-works-the-4-pillars)
 - [Contributing](#-contributing)
 - [License](#-license)
@@ -89,33 +90,76 @@ Before the AI writes a single line of code, it automatically reads your project'
 
 ---
 
-## 🚀 Setup Guide (2 Minutes)
+## 🚀 Install (1 Minute)
 
-Get your AI up to speed instantly.
+The install adds **only two folders** to your project: `Brain/` and `.agents/`. Nothing else.
 
-### Step 1: Add to your project
-You can either run the automated setup or copy the folders manually.
+### Option 1: One-liner (Recommended)
 
-**Automated Setup:**
+Open your terminal **at your project root** and run:
+
 ```bash
-# Clone this template, then run:
-git clone https://github.com/henriquecaner/brain-agent.git
-cd brain-agent
-chmod +x setup.sh
-./setup.sh
+curl -fsSL https://raw.githubusercontent.com/henriquecaner/brain-agent/main/install.sh | bash
 ```
 
-**Manual Setup:**
-Copy the `Brain/` and `.agents/` folders directly to your project root.
+### Option 2: Clone & Install
 
-### Step 2: Initialize the Brain (Required!)
-Once the folders are in your root, open **Antigravity** in your project and paste **ONE** of the following prompts to let the AI initialize its own Brain:
+```bash
+git clone https://github.com/henriquecaner/brain-agent.git /tmp/brain-agent
+/tmp/brain-agent/install.sh
+rm -rf /tmp/brain-agent
+```
 
-**🪄 Option A: If adding to an EXISTING Project**
-> "Initialize Brain — this is an existing project. Deeply analyze the codebase and fill all Brain documents with the real architecture, stack, and patterns."
+### What gets installed
 
-**🪄 Option B: If starting a BRAND NEW Project**
-> "Initialize Brain — this is a new project. Act as a Tech Lead: ask me strategic questions to define scope, tech stack, and goals before scaffolding anything."
+```text
+your-project/
+├── Brain/                    ← 9 markdown templates (empty, ready to fill)
+│   ├── PROJECT_CORE.md
+│   ├── ACTIVE_TASKS.md
+│   ├── ARCHITECTURE_DEEP_REVIEW.md
+│   └── ... (6 more)
+├── .agents/
+│   ├── rules/                ← 2 always-on rule files
+│   ├── skills/               ← 5 pre-built skills (code-review, debugging, etc.)
+│   └── workflows/            ← 2 workflow files
+└── (your existing files untouched)
+```
+
+> **That's it.** No config files, no `npm install`, no build step. Just markdown files that your AI reads automatically.
+
+---
+
+## 🧠 Initialize (Inside Antigravity)
+
+> [!CAUTION]
+> **This step happens INSIDE Antigravity, NOT in the terminal.**
+> Open your project in Antigravity and paste one of the prompts below **in the chat**.
+
+### 🅰️ Path A — Your project already has code
+
+Open Antigravity at your project root and paste this prompt:
+
+> **"Initialize Brain — this is an existing project. Deeply analyze the codebase and fill all Brain documents with the real architecture, stack, and patterns."**
+
+The AI will:
+1. Scan your entire codebase
+2. Auto-fill `Brain/PROJECT_CORE.md`, `ARCHITECTURE_DEEP_REVIEW.md`, and all other Brain docs
+3. Configure skills and workflows for your specific stack
+
+### 🅱️ Path B — You're starting from scratch
+
+Open Antigravity at your project root and paste this prompt:
+
+> **"Initialize Brain — this is a new project. Act as a Tech Lead: ask me strategic questions to define scope, tech stack, and goals before scaffolding anything."**
+
+The AI will:
+1. Ask you strategic questions about your goal
+2. Draft the `Brain/PROJECT_CORE.md` and propose a `TECHNICAL_SPEC.md`
+3. Guide you through setting up the initial scaffolding
+
+> [!IMPORTANT]
+> **Don't skip initialization.** The Brain templates are intentionally empty — the AI fills them with your real project data. Without this step, the AI has no context to work with.
 
 ---
 
@@ -183,6 +227,29 @@ flowchart TD
 
 ---
 
+## 📋 Day-to-Day Usage
+
+### Automatic: Post-Execution Sync
+
+For **complex tasks** (feature builds, refactors, architecture changes), the `post-execution-sync` workflow runs automatically. It updates Brain docs and evaluates Skills without manual effort.
+
+> You can also trigger it manually with `/post-execution-sync`.
+
+### Manual Updates
+
+For **simple fixes**, use this reference:
+
+| When This Happens... | Update This File |
+|----------------------|-----------------|
+| Task started or finished | `ACTIVE_TASKS.md` |
+| Architecture decision made | `DECISION_LOG.md` |
+| Major refactor completed | `ARCHITECTURE_DEEP_REVIEW.md` |
+| Sprint completed | `ROADMAP_SPRINTS.md` + `STATUS_REPORT.md` |
+| New risk identified | `RISKS_ISSUES.md` |
+| Design tokens changed | `DESIGN_SYSTEM.md` |
+
+---
+
 ## 🤝 Contributing
 
 Contributions are welcome! Whether you're a vibecoder, a builder, or a traditional developer — we'd love your input. Please read the [Contributing Guide](./CONTRIBUTING.md) and the [Code of Conduct](./CODE_OF_CONDUCT.md) before submitting a PR.
@@ -193,7 +260,6 @@ Contributions are welcome! Whether you're a vibecoder, a builder, or a tradition
 
 | Document | Description |
 |----------|-------------|
-| [Setup Guide](./SETUP_GUIDE.md) | Detailed installation & onboarding |
 | [Customization](./CUSTOMIZATION.md) | Create custom skills, rules, and workflows |
 | [Upgrade Guide](./UPGRADE.md) | Upgrade to new versions without losing customizations |
 | [Contributing](./CONTRIBUTING.md) | How to contribute to this project |
