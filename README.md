@@ -12,7 +12,7 @@
 
 <br/>
 
-[Setup Guide](./SETUP_GUIDE.md) · [Customization](./CUSTOMIZATION.md) · [Contributing](./CONTRIBUTING.md) · [Changelog](./CHANGELOG.md)
+[Setup Guide](./SETUP_GUIDE.md) · [Customization](./CUSTOMIZATION.md) · [Upgrade](./UPGRADE.md) · [Contributing](./CONTRIBUTING.md) · [Changelog](./CHANGELOG.md)
 
 </div>
 
@@ -195,6 +195,7 @@ Contributions are welcome! Whether you're a vibecoder, a builder, or a tradition
 |----------|-------------|
 | [Setup Guide](./SETUP_GUIDE.md) | Detailed installation & onboarding |
 | [Customization](./CUSTOMIZATION.md) | Create custom skills, rules, and workflows |
+| [Upgrade Guide](./UPGRADE.md) | Upgrade to new versions without losing customizations |
 | [Contributing](./CONTRIBUTING.md) | How to contribute to this project |
 | [Changelog](./CHANGELOG.md) | Version history and release notes |
 
