@@ -1,0 +1,34 @@
+# OS files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Node (if applicable)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Logs
+*.log
+
+# AI IDE rule files (generated per-project by setup.sh)
+.cursorrules
+.windsurfrules
+.clinerules
+
+# Temporary files
+tmp/
+*.tmp

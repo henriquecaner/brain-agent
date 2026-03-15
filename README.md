@@ -1,6 +1,31 @@
+<div align="center">
+
 # 🧠 Brain + Agent Architecture
 
-> Transform your AI from a forgetful junior dev into a Senior Tech Lead who knows your project inside out.
+**Transform your AI from a forgetful junior dev into a Senior Tech Lead who knows your project inside out.**
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/henriquecaner/brain-agent?style=social)](https://github.com/henriquecaner/brain-agent/stargazers)
+[![GitHub issues](https://img.shields.io/github/issues/henriquecaner/brain-agent)](https://github.com/henriquecaner/brain-agent/issues)
+[![Last Commit](https://img.shields.io/github/last-commit/henriquecaner/brain-agent)](https://github.com/henriquecaner/brain-agent/commits/main)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](./CONTRIBUTING.md)
+
+<br/>
+
+[Setup Guide](./SETUP_GUIDE.md) · [Customization](./CUSTOMIZATION.md) · [Contributing](./CONTRIBUTING.md) · [Changelog](./CHANGELOG.md)
+
+</div>
+
+---
+
+## Table of Contents
+
+- [The Problem](#-the-problem-ai-amnesia)
+- [The Solution](#-the-aha-solution-project-native-memory)
+- [Quick Start](#-setup-guide-2-minutes)
+- [How It Works](#%EF%B8%8F-how-it-works-the-3-pillars)
+- [Contributing](#-contributing)
+- [License](#-license)
 
 ---
 
@@ -62,12 +87,11 @@ You can either run the automated setup or copy the folders manually.
 
 **Automated Setup:**
 ```bash
-# Clone or download this template somewhere, then run:
-cp -r brain-agent-template/ /path/to/your-project/
-cd /path/to/your-project/brain-agent-template
+# Clone or download this template, then run:
+git clone https://github.com/henriquecaner/brain-agent.git
+cd brain-agent
 chmod +x setup.sh
 ./setup.sh
-# The script will handle moving folders and renaming placeholders.
 ```
 
 **Manual Setup:**
@@ -111,10 +135,23 @@ Instead of one generic AI, you get a fleet of specialized experts (UI, Database,
 
 ---
 
-## 🔗 Next Steps
-- **[SETUP_GUIDE.md](./SETUP_GUIDE.md)** — Detailed installation & team onboarding checklist.
-- **[CUSTOMIZATION.md](./CUSTOMIZATION.md)** — How to create custom skills, rules, and workflows for your company.
+## 🤝 Contributing
+
+Contributions are welcome! Please read the [Contributing Guide](./CONTRIBUTING.md) and the [Code of Conduct](./CODE_OF_CONDUCT.md) before submitting a PR.
 
 ---
 
-**License:** MIT — Use freely to build better software, faster.
+## 📚 Documentation
+
+| Document | Description |
+|----------|-------------|
+| [Setup Guide](./SETUP_GUIDE.md) | Detailed installation & team onboarding |
+| [Customization](./CUSTOMIZATION.md) | Create custom skills, rules, and workflows |
+| [Contributing](./CONTRIBUTING.md) | How to contribute to this project |
+| [Changelog](./CHANGELOG.md) | Version history and release notes |
+
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](./LICENSE).

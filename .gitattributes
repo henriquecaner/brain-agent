@@ -1,0 +1,8 @@
+# Treat Markdown as documentation so GitHub doesn't count it as code
+*.md linguist-documentation
+
+# Treat shell scripts as vendored so they don't dominate language stats
+*.sh linguist-vendored
+
+# Normalize line endings
+* text=auto
