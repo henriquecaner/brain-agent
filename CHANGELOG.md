@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 - 🧠 **Brain templates** — 9 project-state documents (`PROJECT_CORE`, `ACTIVE_TASKS`, `ARCHITECTURE_DEEP_REVIEW`, etc.)
-- ⚖️ **Agent rules** — `universal-agent-rules.md` (orchestrator) and `engineering-laws.md` (security & standards)
+- ⚖️ **Agent rules** — `universal-agent-rules.md` (orchestrator) and `engineering-laws.md` (security & standards), loaded automatically by Antigravity
 - 🎯 **Agent skills** — Template system with `code-review`, `create-plan`, `debugging`, and `testing` skills
 - 🔧 **Setup script** — Interactive `setup.sh` with cross-platform support (macOS/Linux)
 - 📜 **Utility scripts** — `bin/create-skill.sh` for scaffolding new skills

@@ -2,7 +2,7 @@
 
 # 🧠 Brain + Agent Architecture
 
-**Transform your AI from a forgetful junior dev into a Senior Tech Lead who knows your project inside out.**
+**Give your AI real project memory. Build things that actually scale.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)
 [![GitHub stars](https://img.shields.io/github/stars/henriquecaner/brain-agent?style=social)](https://github.com/henriquecaner/brain-agent/stargazers)
@@ -29,27 +29,33 @@
 
 ---
 
-## 🤯 The Problem: AI Amnesia
+## 🤯 The Problem: AI Amnesia + Zero Standards
 
-You know the drill. You open Cursor, Windsurf, or Copilot, give it a task, and it confidently writes code that:
-- Breaks your architecture
-- Ignores your styling conventions
-- Uses deprecated libraries
-- Forgets the context of the previous chat
+You're building with AI — whether you're a vibecoder shipping your first SaaS or a seasoned builder scaling a product. And you've hit **two walls**:
 
-**Why?** Because the AI only sees isolated files. It lacks the "big picture". You end up pasting massive system prompts every single time: *"Use React Server Components, don't use standard `<a>` tags, remember we use a custom auth wrapper..."* 
+### 🧠 Wall 1: It Forgets Everything
+- Every new chat, the AI **starts from scratch**
+- It forgets your tech stack, your architecture, your patterns
+- You keep copy-pasting the same instructions over and over
 
-It's exhausting. 
+### 📏 Wall 2: It Has No Standards
+- It hardcodes secrets, skips error handling, writes sloppy code
+- It mixes patterns — half your app looks one way, half looks another
+- There are **no guardrails** to enforce quality, security, or consistency
+
+**Why?** Because the AI only sees isolated files. It has no "big picture" and no rules to follow. You end up repeating yourself every single time — and even then, nothing guarantees it will actually listen.
+
+It's exhausting — and it doesn't scale.
 
 ---
 
 ## 💡 The "AHA!" Solution: Project-Native Memory
 
-What if your repository had its own persistent, structured brain? 
+What if your repository had its own persistent, structured brain?
 
-**Brain + Agent Architecture** is a framework that lives *inside* your Git repository. It gives your AI coding assistants **persistent project memory** and **specialized agent skills**.
+**Brain + Agent Architecture** is a framework that lives *inside* your Git repository. It gives your AI **persistent project memory** and **specialized agent skills** through the `.agents/` directory structure that tools like [Google Antigravity](https://blog.google/technology/google-labs/google-antigravity/) natively support.
 
-Before the AI writes a single line of code, it automatically reads your project's `Brain` to understand the scope, current sprint tasks, and strict engineering laws.
+Before the AI writes a single line of code, it automatically reads your project's `Brain` to understand the scope, current tasks, and strict engineering rules.
 
 ```text
 ┌─────────────────────────────────────────────────────────────┐
@@ -57,7 +63,7 @@ Before the AI writes a single line of code, it automatically reads your project'
 │                                                             │
 │  📁 Brain/                   ← Project State & Memory       │
 │  │  PROJECT_CORE.md          ← Scope, goals, tech stack     │
-│  │  ACTIVE_TASKS.md          ← Sprint tracker               │
+│  │  ACTIVE_TASKS.md          ← Task tracker                 │
 │  │  ARCHITECTURE_DEEP_REVIEW ← Technical deep dive          │
 │  │  ...                                                     │
 │                                                             │
@@ -66,15 +72,18 @@ Before the AI writes a single line of code, it automatically reads your project'
 │  │  │  universal-agent-rules ← Orchestrator behavior        │
 │  │  │  engineering-laws      ← Security & code standards    │
 │  │  📁 skills/              ← Specialized AI Skills         │
-│  │  │  📁 frontend-design/  ← On-demand UI skill            │
+│  │  │  📁 code-review/      ← On-demand Review skill        │
 │  │  │  📁 debugging/        ← On-demand Debug skill         │
+│  │  📁 workflows/           ← Step-by-step procedures       │
 └─────────────────────────────────────────────────────────────┘
 ```
 
-**The Result:** 
-- 📖 **Zero Context Loss:** The AI knows your exact tech stack and architectural decisions.
-- ⚖️ **Strict Compliance:** It reads and obeys your `engineering-laws` (no more hardcoded secrets or sloppy error handling).
-- 🥷 **Dynamic Skills (Matrix-style):** When you ask for UI help, it silently loads the `frontend-design` skill to understand your exact design system before acting. 
+**The Result:**
+- 📖 **Zero Context Loss:** The AI knows your exact tech stack and architectural decisions — every single chat.
+- ⚖️ **Enforced Standards:** Agent rules are **always on** — they run on every interaction, guaranteeing the AI respects your Brain, your security rules, and your architecture. No exceptions.
+- 🥷 **Dynamic Skills:** When you ask for help with code review, debugging, or testing, it silently loads the right skill and applies specialized knowledge on demand.
+
+> **Built for [Google Antigravity](https://blog.google/technology/google-labs/google-antigravity/)** — leveraging native support for `.agents/rules/`, `.agents/skills/`, and `.agents/workflows/`.
 
 ---
 
@@ -87,7 +96,7 @@ You can either run the automated setup or copy the folders manually.
 
 **Automated Setup:**
 ```bash
-# Clone or download this template, then run:
+# Clone this template, then run:
 git clone https://github.com/henriquecaner/brain-agent.git
 cd brain-agent
 chmod +x setup.sh
@@ -97,47 +106,48 @@ chmod +x setup.sh
 **Manual Setup:**
 Copy the `Brain/` and `.agents/` folders directly to your project root.
 
-### Step 2: The "Magic Prompts" (Required!)
-Once the folders are in your root, open your AI Assistant (Cursor, Windsurf, Cline, etc.) and paste **ONE** of the following magic prompts to let the AI initialize its own Brain:
+### Step 2: Initialize the Brain (Required!)
+Once the folders are in your root, open **Antigravity** in your project and paste **ONE** of the following prompts to let the AI initialize its own Brain:
 
 **🪄 Option A: If adding to an EXISTING Project**
-> "start novo brain - Projeto existente"
-> *(The AI will deeply analyze your entire codebase and automatically fill the Brain with ultra-specific context about your architecture, stack, and patterns.)*
+> "Initialize Brain — this is an existing project. Deeply analyze the codebase and fill all Brain documents with the real architecture, stack, and patterns."
 
 **🪄 Option B: If starting a BRAND NEW Project**
-> "start novo brain - Projeto zerado"
-> *(The AI will assume a Tech Lead role, asking you strategic questions to define the scope, tech stack, and initial scaffolding before writing code.)*
+> "Initialize Brain — this is a new project. Act as a Tech Lead: ask me strategic questions to define scope, tech stack, and goals before scaffolding anything."
 
 ---
 
 ## ⚙️ How It Works (The 3 Pillars)
 
 ### 1. 🧠 The Brain (`/Brain/`)
-**The concept:** Large Language Models (like Claude or GPT-4) suffer from amnesia. They drop context over long chats. The `/Brain/` directory acts as a permanent, static memory bank that the AI reads *before* acting.
+**The concept:** AI assistants suffer from amnesia — they drop context over long chats. The `/Brain/` directory acts as a permanent memory bank that the AI reads *before* acting.
 
-The single source of truth for Project State. The AI reads this to know *what* we are doing and *why*.
+The single source of truth for Project State. The AI reads this to know *what* we are building and *why*.
 - `PROJECT_CORE.md` — The exact tech stack and end goals. (Prevents the AI from suggesting Python in a TS repository).
-- `ACTIVE_TASKS.md` — The current sprint. The AI updates this as it finishes tasks, so you never lose track of what's next.
+- `ACTIVE_TASKS.md` — Current tasks. The AI updates this as it finishes work, so you never lose track of what's next.
 - `ARCHITECTURE_DEEP_REVIEW.md` — The technical truth. The AI uses this to avoid breaking existing patterns.
 
-### 2. ⚖️ The Laws (`/.agents/rules/`)
-Universal rules the AI *must* always follow. 
-- `engineering-laws.md` — Enforces security boundaries, async rules, and clean architecture.
-- `universal-agent-rules.md` — The "Orchestrator" that tells the AI *how to behave* and when to load specific skills.
+### 2. ⚖️ The Laws (`/.agents/rules/`) — Always On
+These are the **guardrails**. Unlike skills (which are on-demand), rules are **always active** — Antigravity loads them on every single interaction. This is what guarantees the AI will always read the Brain, follow your standards, and never go rogue.
+
+- `engineering-laws.md` — Enforces security boundaries, async rules, clean architecture, and testing standards. The AI **cannot** skip these.
+- `universal-agent-rules.md` — The "Orchestrator" that forces the AI to read the Brain before acting, and routes it to the right skills based on what you're asking.
+
+> **This is the key insight:** The Brain holds the knowledge, but the Rules are what **enforce** it. Without always-on rules, the AI could simply ignore the Brain. With them, it can't.
 
 ### 3. 🎯 Agent Skills (`/.agents/skills/<skill>/`)
 **The concept:** You can't put *every* rule in the main prompt, or the AI gets confused and slow. Skills solve this through **dynamic routing**.
 
-You wouldn't ask a DBA to write CSS. Agent Skills are **specialized, hyper-focused knowledge loaded strictly on-demand**. 
-If you ask the AI to "fix the padding on the login button", it detects the "frontend" domain, silently reads `.agents/skills/frontend-design/SKILL.md` (where you define your Design System rules), and applies them perfectly mapping to your Tailwind or CSS Modules.
+Agent Skills are **specialized, hyper-focused knowledge loaded strictly on-demand**.
+If you ask the AI to "fix the padding on the login button", it detects the "frontend" domain, silently reads `.agents/skills/frontend-design/SKILL.md` (where you define your Design System rules), and applies them perfectly.
 
-Instead of one generic AI, you get a fleet of specialized experts (UI, Database, Security) that only wake up when you need them.
+Instead of one generic AI, you get a team of specialized experts (UI, Database, Security) that only activate when you need them.
 
 ---
 
 ## 🤝 Contributing
 
-Contributions are welcome! Please read the [Contributing Guide](./CONTRIBUTING.md) and the [Code of Conduct](./CODE_OF_CONDUCT.md) before submitting a PR.
+Contributions are welcome! Whether you're a vibecoder, a builder, or a traditional developer — we'd love your input. Please read the [Contributing Guide](./CONTRIBUTING.md) and the [Code of Conduct](./CODE_OF_CONDUCT.md) before submitting a PR.
 
 ---
 
@@ -145,7 +155,7 @@ Contributions are welcome! Please read the [Contributing Guide](./CONTRIBUTING.m
 
 | Document | Description |
 |----------|-------------|
-| [Setup Guide](./SETUP_GUIDE.md) | Detailed installation & team onboarding |
+| [Setup Guide](./SETUP_GUIDE.md) | Detailed installation & onboarding |
 | [Customization](./CUSTOMIZATION.md) | Create custom skills, rules, and workflows |
 | [Contributing](./CONTRIBUTING.md) | How to contribute to this project |
 | [Changelog](./CHANGELOG.md) | Version history and release notes |

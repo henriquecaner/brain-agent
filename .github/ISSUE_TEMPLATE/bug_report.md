@@ -23,7 +23,7 @@ What actually happened.
 ## Environment
 - **OS:** macOS / Linux / WSL
 - **Shell:** bash / zsh
-- **AI IDE:** Cursor / Windsurf / Cline / Other
+- **Antigravity Version:** (e.g., latest)
 
 ## Additional Context
 Logs, screenshots, or anything else that helps.

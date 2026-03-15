@@ -5,16 +5,20 @@
 ---
 
 ## 🧠 The Mental Model (Read First)
-Before you install, understand the shift:
-1. **The Brain (`/Brain/`)** is your project's permanent long-term memory. It bypasses the AI's limited context window by forcing the Assistant to read your rules, architecture, and current sprint state *before* it begins coding.
-2. **The Skills (`/.agents/skills/`)** are specialized experts. You write custom Markdown files teaching the AI exactly how to use your specific UI library or deploy commands. The orchestrator routes the AI to these skills ONLY when relevant, saving tokens and preventing confusion.
+Before you install, understand the two problems this solves:
+
+1. **AI Amnesia** — The AI forgets everything between chats. The **Brain (`/Brain/`)** is your project's permanent long-term memory. It stores your architecture, tech stack, active tasks, and decisions so the AI always has full context before it acts.
+
+2. **Zero Standards** — Without guardrails, the AI writes inconsistent, sloppy code. The **Rules (`/.agents/rules/`)** are **always on** — Antigravity loads them on every single interaction. They force the AI to read the Brain, follow your engineering laws, and never go rogue. This is what makes the whole system work.
+
+3. **Skills (`/.agents/skills/`)** are optional, specialized experts. When the AI detects a specific domain (frontend, debugging, testing), it silently loads the matching skill for hyper-focused knowledge. On-demand only — saves tokens and prevents confusion.
 
 ---
 
 ## Prerequisites
 
-- A software project with a Git repository
-- An AI coding assistant that reads workspace files (Claude Code, Cursor, Copilot, etc.)
+- A project with a Git repository (or a new idea you want to build)
+- [Google Antigravity](https://blog.google/technology/google-labs/google-antigravity/) installed
 - Basic familiarity with Markdown
 
 ---
@@ -58,10 +62,10 @@ find /path/to/your-project/Brain/ /path/to/your-project/.agents/ \
 
 Now that the files are in your project, **let the AI do the heavy lifting.**
 
-Open your AI coding assistant (Cursor, Windsurf, Claude Code, Cline, etc.) at the root of your project, and send **one** of the following prompts:
+Open **Antigravity** at the root of your project, and send **one** of the following prompts:
 
 ### Option A: The Project ALREADY EXISTS
-> "start novo brain - Projeto existente"
+> "Initialize Brain — this is an existing project. Deeply analyze the codebase and fill all Brain documents with the real architecture, stack, and patterns."
 
 **What the AI will do:**
 1. Deeply analyze your current codebase.
@@ -69,7 +73,7 @@ Open your AI coding assistant (Cursor, Windsurf, Claude Code, Cline, etc.) at th
 3. Hook up the `.agents/skills/` skills to your specific context.
 
 ### Option B: The Project is NEW (Empty)
-> "start novo brain - Projeto zerado"
+> "Initialize Brain — this is a new project. Act as a Tech Lead: ask me strategic questions to define scope, tech stack, and goals before scaffolding anything."
 
 **What the AI will do:**
 1. Ask you a series of strategic questions about your goal.
@@ -103,14 +107,14 @@ Add to your `.gitignore` if needed:
 
 ## 4. Onboarding Checklist
 
-Share this checklist with new team members:
+Share this checklist with anyone joining the project:
 
-### For Developers
+### For Builders / Vibecoders
 
 - [ ] Read `Brain/PROJECT_CORE.md` — understand scope and stack
 - [ ] Read `Brain/TECHNICAL_SPEC.md` — understand architecture
 - [ ] Read `.agents/rules/engineering-laws.md` — understand coding standards
-- [ ] Check `Brain/ACTIVE_TASKS.md` — see current sprint status
+- [ ] Check `Brain/ACTIVE_TASKS.md` — see current task status
 - [ ] Run the workflow in `.agents/workflows/global-workflow.md` — set up local env
 
 ### For Tech Leads
@@ -157,7 +161,7 @@ The orchestrator rules already instruct the AI to do this automatically for code
 
 | Problem | Solution |
 |---------|----------|
-| AI doesn't follow rules | Check that `.agents/rules/*.md` have `trigger: always_on` in frontmatter |
+| AI doesn't follow rules | Check that `.agents/rules/*.md` files exist and have proper formatting |
 | AI doesn't load skills | Verify the skill routing table in `universal-agent-rules.md` has the correct paths |
 | AI gives generic answers | Fill in `PROJECT_CORE.md` and `TECHNICAL_SPEC.md` with real content — the AI needs context |
 | AI makes wrong architecture decisions | Add the decision to `DECISION_LOG.md` so it won't repeat the mistake |

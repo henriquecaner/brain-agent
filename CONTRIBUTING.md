@@ -2,6 +2,8 @@
 
 First off, thank you for considering contributing! 🎉
 
+Whether you're a vibecoder, a builder, or a seasoned engineer — your contributions make this project better for everyone.
+
 ## How to Contribute
 
 ### 🐛 Reporting Bugs
@@ -44,9 +46,9 @@ First off, thank you for considering contributing! 🎉
 ```
 Brain/          → Project state templates (markdown)
 .agents/
-  rules/        → Universal AI rules
+  rules/        → Universal AI rules (loaded automatically by Antigravity)
   skills/       → Specialized AI skills (each in its own folder)
-  workflows/    → Development workflows
+  workflows/    → Step-by-step procedures (triggered by slash commands)
 bin/            → Utility scripts
 ```
 
