@@ -85,6 +85,19 @@ Each release in this repo includes:
 
 ## Quick Upgrade via AI Prompt
 
-If you're using Antigravity, you can paste this prompt to let the AI handle the upgrade:
+If you're using Antigravity, paste this prompt and the AI will handle the upgrade for you:
 
-> "Upgrade the Brain + Agent architecture to v1.1.0. Read the UPGRADE.md at https://github.com/henriquecaner/brain-agent/blob/main/UPGRADE.md and apply only the changes for my current version. Do NOT overwrite any customized Brain docs or rules — only add new files and make surgical edits."
+### v1.0.0 → v1.1.0 Prompt
+
+> Upgrade the Brain + Agent architecture from v1.0.0 to v1.1.0. Do these 3 things and NOTHING else:
+>
+> **1. Create this new file** at `.agents/workflows/post-execution-sync.md`:
+> Download it from https://raw.githubusercontent.com/henriquecaner/brain-agent/v1.1.0/.agents/workflows/post-execution-sync.md
+>
+> **2. In `.agents/rules/universal-agent-rules.md`**, find the "Do Work" Loop (§5.A) and add this as Step 7 after Step 6:
+> `7.  **Sync:** For COMPLEX/ORCHESTRATE tasks, run /post-execution-sync workflow to update Brain docs and evaluate Skills.`
+>
+> **3. In the same file**, find the Dynamic Skill Loading table (§3) and add this row after the Debugging row:
+> `| **Post-Execution, Sync** | .agents/workflows/post-execution-sync.md | Auto-sync Brain & Skills after changes. |`
+>
+> Do NOT modify any Brain/ documents. Do NOT overwrite any customized content. Only add the new workflow file and the two lines above.
