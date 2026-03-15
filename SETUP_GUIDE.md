@@ -13,6 +13,8 @@ Before you install, understand the two problems this solves:
 
 3. **Skills (`/.agents/skills/`)** are optional, specialized experts. When the AI detects a specific domain (frontend, debugging, testing), it silently loads the matching skill for hyper-focused knowledge. On-demand only — saves tokens and prevents confusion.
 
+4. **Workflows (`/.agents/workflows/`)** are automated procedures. The most important is **`post-execution-sync`** — it runs after every complex task to analyze what changed and automatically update Brain docs and Skills. This is what keeps the system alive as the project evolves.
+
 ---
 
 ## Prerequisites
@@ -86,7 +88,8 @@ Open **Antigravity** at the root of your project, and send **one** of the follow
 
 After the AI runs its initialization, you may want to manually tweak:
 
-*   **Workflow:** Open `.agents/workflows/global-workflow.md` and replace the example commands with your actual dev setup (e.g., `npm run dev`).
+*   **Global Workflow:** Open `.agents/workflows/global-workflow.md` and replace the example commands with your actual dev setup (e.g., `npm run dev`).
+*   **Post-Execution Sync:** Review `.agents/workflows/post-execution-sync.md` — the default triggers and Brain update rules work for most projects, but you can adjust the impact checklist to match your specific workflow.
 *   **Engineering Laws:** Open `.agents/rules/engineering-laws.md` and remove any laws that don't apply to your stack.
 
 ---
@@ -116,6 +119,7 @@ Share this checklist with anyone joining the project:
 - [ ] Read `.agents/rules/engineering-laws.md` — understand coding standards
 - [ ] Check `Brain/ACTIVE_TASKS.md` — see current task status
 - [ ] Run the workflow in `.agents/workflows/global-workflow.md` — set up local env
+- [ ] Understand how `.agents/workflows/post-execution-sync.md` keeps Brain updated automatically
 
 ### For Tech Leads
 
@@ -134,9 +138,20 @@ Share this checklist with anyone joining the project:
 
 ## 5. Day-to-Day Usage
 
-### Rule: Keep Brain Updated
+### Automatic: Post-Execution Sync (Recommended)
 
-The AI reads Brain docs for context. **Outdated Brain = bad AI output.**
+For **complex tasks** (feature builds, refactors, architecture changes), the `post-execution-sync` workflow runs automatically after completion. It:
+
+1. **Analyzes** what files and modules were affected
+2. **Updates** the relevant Brain docs (architecture, tasks, decisions)
+3. **Evaluates** whether new Skills are needed or existing ones are outdated
+4. **Reports** a summary of what was synced
+
+> You don't need to manually update Brain docs after complex work — the workflow handles it. You can also trigger it manually with `/post-execution-sync`.
+
+### Manual: For Simple Changes
+
+For **simple fixes** (typos, color changes), the sync workflow doesn't run. Use this reference to update Brain docs manually when needed:
 
 | When This Happens... | Update This File |
 |----------------------|-----------------|
@@ -149,11 +164,9 @@ The AI reads Brain docs for context. **Outdated Brain = bad AI output.**
 
 ### Tip: Let the AI Update Brain
 
-You can ask the AI to update Brain docs after completing work:
+You can always ask the AI to update Brain docs directly:
 
 > "Update ACTIVE_TASKS.md to mark T-05 as DONE and add the new task T-06 for auth refactoring."
-
-The orchestrator rules already instruct the AI to do this automatically for code changes.
 
 ---
 
@@ -166,3 +179,5 @@ The orchestrator rules already instruct the AI to do this automatically for code
 | AI gives generic answers | Fill in `PROJECT_CORE.md` and `TECHNICAL_SPEC.md` with real content — the AI needs context |
 | AI makes wrong architecture decisions | Add the decision to `DECISION_LOG.md` so it won't repeat the mistake |
 | Conflicting AI advice | Check for contradictions between rules and skills — rules take precedence |
+| Brain docs are outdated | Run `/post-execution-sync` manually to trigger a full analysis and sync |
+| Post-execution sync is too noisy | Edit the trigger criteria in `.agents/workflows/post-execution-sync.md` |

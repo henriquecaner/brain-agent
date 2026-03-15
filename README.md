@@ -23,7 +23,7 @@
 - [The Problem](#-the-problem-ai-amnesia)
 - [The Solution](#-the-aha-solution-project-native-memory)
 - [Quick Start](#-setup-guide-2-minutes)
-- [How It Works](#%EF%B8%8F-how-it-works-the-3-pillars)
+- [How It Works](#%EF%B8%8F-how-it-works-the-4-pillars)
 - [Contributing](#-contributing)
 - [License](#-license)
 
@@ -74,7 +74,9 @@ Before the AI writes a single line of code, it automatically reads your project'
 │  │  📁 skills/              ← Specialized AI Skills         │
 │  │  │  📁 code-review/      ← On-demand Review skill        │
 │  │  │  📁 debugging/        ← On-demand Debug skill         │
-│  │  📁 workflows/           ← Step-by-step procedures       │
+│  │  📁 workflows/           ← Automated Procedures          │
+│  │  │  global-workflow      ← Dev setup & commands          │
+│  │  │  post-execution-sync  ← Auto-sync Brain after work    │
 └─────────────────────────────────────────────────────────────┘
 ```
 
@@ -117,7 +119,7 @@ Once the folders are in your root, open **Antigravity** in your project and past
 
 ---
 
-## ⚙️ How It Works (The 3 Pillars)
+## ⚙️ How It Works (The 4 Pillars)
 
 ### 1. 🧠 The Brain (`/Brain/`)
 **The concept:** AI assistants suffer from amnesia — they drop context over long chats. The `/Brain/` directory acts as a permanent memory bank that the AI reads *before* acting.
@@ -142,6 +144,42 @@ Agent Skills are **specialized, hyper-focused knowledge loaded strictly on-deman
 If you ask the AI to "fix the padding on the login button", it detects the "frontend" domain, silently reads `.agents/skills/frontend-design/SKILL.md` (where you define your Design System rules), and applies them perfectly.
 
 Instead of one generic AI, you get a team of specialized experts (UI, Database, Security) that only activate when you need them.
+
+### 4. 🔄 Workflows (`/.agents/workflows/`) — Self-Healing Context
+**The concept:** Without automation, Brain docs and Skills go stale as the codebase evolves. Workflows keep the system **alive and accurate**.
+
+The key workflow is **`post-execution-sync`** — triggered automatically after every complex task. It analyzes what changed, updates the relevant Brain documents, and evaluates whether new Skills are needed.
+
+- `global-workflow.md` — Dev environment setup and common commands.
+- `post-execution-sync.md` — **The self-healing loop** that keeps Brain & Skills in sync with reality.
+
+> **Why this matters:** The Brain is only useful if it's accurate. This workflow ensures it *stays* accurate — automatically, without manual effort.
+
+```mermaid
+flowchart TD
+    A["🧑‍💻 Developer requests a task"] --> B{"⚖️ Socratic Gate"}
+    B -->|CLARIFY| C["Answer directly"]
+    B -->|SIMPLE FIX| D["Execute & update tasks"]
+    B -->|COMPLEX / ORCHESTRATE| E["Load Skill + Execute"]
+
+    E --> F["✅ Task Complete"]
+    F --> G["🔄 Post-Execution Sync"]
+
+    G --> H["1. Analyze Impact"]
+    H --> I["2. Update Brain Docs"]
+    I --> J["3. Evaluate Skills"]
+    J --> K["4. Report Summary"]
+
+    I -.->|if architecture changed| L["ARCHITECTURE_DEEP_REVIEW.md"]
+    I -.->|if stack changed| M["PROJECT_CORE.md"]
+    I -.->|if decision made| N["DECISION_LOG.md"]
+    J -.->|if new domain found| O["Create new Skill"]
+    J -.->|if pattern changed| P["Update existing Skill"]
+
+    style G fill:#4CAF50,stroke:#333,color:#fff
+    style A fill:#2196F3,stroke:#333,color:#fff
+    style B fill:#FF9800,stroke:#333,color:#fff
+```
 
 ---
 

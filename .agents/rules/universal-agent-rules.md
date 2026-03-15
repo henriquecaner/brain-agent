@@ -86,6 +86,7 @@ module/
 | **Planning, Architecture** | `.agents/skills/create-plan/SKILL.md` | Project breakdown & roadmap. |
 | **Code Review, PR** | `.agents/skills/code-review/SKILL.md` | Code review checklist & patterns. |
 | **Debugging, Errors** | `.agents/skills/debugging/SKILL.md` | Systematic debugging workflow. |
+| **Post-Execution, Sync** | `.agents/workflows/post-execution-sync.md` | Auto-sync Brain & Skills after changes. |
 <!-- 
   ADD YOUR PROJECT-SPECIFIC SKILLS HERE, e.g.:
   | **UI, Frontend, CSS** | `.agents/skills/frontend-design/SKILL.md` | Design rules, components. |
@@ -130,6 +131,7 @@ module/
 4.  **Execute:** Write Code (Adhering to Skill + Universal Code Rules).
 5.  **Verify:** Run checks (lint, type check, tests).
 6.  **Document:** Update `@ACTIVE_TASKS` to `[DONE]`.
+7.  **Sync:** For COMPLEX/ORCHESTRATE tasks, run `/post-execution-sync` workflow to update Brain docs and evaluate Skills.
 
 ### B. The "Update Brain" Loop
 1.  **Trigger:** New decision or changed requirement.

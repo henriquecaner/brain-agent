@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [1.1.0] - 2026-03-15
+
+### Added
+- 🔄 **Post-execution sync workflow** — `.agents/workflows/post-execution-sync.md` automatically analyzes changes and updates Brain docs & Skills after complex tasks
+- 📊 **Architecture diagram** — Mermaid flowchart in README showing the full task lifecycle including the sync loop
+
+### Changed
+- 📖 **README.md** — Upgraded from "3 Pillars" to "4 Pillars" with new Workflows section, updated directory tree
+- 📖 **SETUP_GUIDE.md** — Added workflows to mental model, onboarding checklist, day-to-day usage, and troubleshooting
+- 📖 **CUSTOMIZATION.md** — Updated workflows section with post-execution-sync reference and registration tip
+- 🔧 **setup.sh** — Granular copy output now lists rules/skills/workflows separately, added sync workflow to next-steps
+- ⚖️ **universal-agent-rules.md** — Added Step 7 (Sync) to "Do Work" loop and routing entry for post-execution-sync
+
 ## [1.0.0] - 2026-03-15
 
 ### Added

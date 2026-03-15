@@ -122,7 +122,11 @@ trigger: always_on
 
 ## 3. Creating Workflows
 
-Workflows are step-by-step procedures triggered by slash commands.
+Workflows are step-by-step procedures triggered by slash commands or automatically by rules.
+
+The template ships with two workflows:
+- **`global-workflow.md`** — Dev setup and common commands (`/global-workflow`)
+- **`post-execution-sync.md`** — Automatically syncs Brain docs and evaluates Skills after complex tasks (`/post-execution-sync`)
 
 ### Format
 
@@ -175,6 +179,8 @@ Workflows in `.agents/workflows/` are auto-discovered. The filename becomes the 
 
 - `.agents/workflows/deploy.md` → `/deploy`
 - `.agents/workflows/test-suite.md` → `/test-suite`
+
+> **Tip:** The `post-execution-sync` workflow is also registered in the skill routing table in `universal-agent-rules.md`, so it can be triggered automatically by the "Do Work" loop (Step 7) after complex tasks.
 
 ---
 

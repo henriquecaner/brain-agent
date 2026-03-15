@@ -72,7 +72,9 @@ echo -e "  Project Name: ${GREEN}${PROJECT_NAME}${NC}"
 echo -e "  Tech Stack:   ${GREEN}${TECH_STACK}${NC}"
 echo -e "  Target:       ${GREEN}${TARGET_DIR}${NC}"
 echo -e "  Will create:  ${GREEN}${TARGET_DIR}/Brain/${NC}"
-echo -e "                ${GREEN}${TARGET_DIR}/.agents/${NC}"
+echo -e "                ${GREEN}${TARGET_DIR}/.agents/rules/${NC}"
+echo -e "                ${GREEN}${TARGET_DIR}/.agents/skills/${NC}"
+echo -e "                ${GREEN}${TARGET_DIR}/.agents/workflows/${NC}"
 echo ""
 
 read -p "  Proceed? (y/N) " CONFIRM
@@ -111,10 +113,12 @@ if [ "$SKIP_BRAIN" != true ]; then
     echo -e "  ${GREEN}✓${NC} Copied Brain/"
 fi
 
-# Copy .agents
+# Copy .agents (rules + skills + workflows)
 if [ "$SKIP_AGENT" != true ]; then
     cp -r "$SCRIPT_DIR/.agents/" "$TARGET_DIR/.agents/"
-    echo -e "  ${GREEN}✓${NC} Copied .agents/"
+    echo -e "  ${GREEN}✓${NC} Copied .agents/rules/"
+    echo -e "  ${GREEN}✓${NC} Copied .agents/skills/"
+    echo -e "  ${GREEN}✓${NC} Copied .agents/workflows/ (includes post-execution-sync)"
 fi
 
 # Replace placeholders
@@ -166,6 +170,9 @@ echo -e "     > \"Initialize Brain — this is an existing project. Deeply analy
 echo -e "       the codebase and fill all Brain documents with the real architecture.\""
 echo -e ""
 echo -e "  ${YELLOW}2.${NC} The AI will guide you through the rest of the configuration."
+echo -e ""
+echo -e "  ${YELLOW}3.${NC} After setup, every complex task will auto-sync Brain docs via"
+echo -e "     ${BOLD}.agents/workflows/post-execution-sync.md${NC}"
 echo -e ""
 echo -e "  📖 See ${BOLD}SETUP_GUIDE.md${NC} for manual configuration if needed."
 echo -e "  🎨 See ${BOLD}CUSTOMIZATION.md${NC} for extending the architecture."
