@@ -31,7 +31,7 @@ if [ -z "$SKILL_NAME" ]; then
 fi
 
 PROJECT_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
-SKILL_DIR="$PROJECT_ROOT/.agent/$SKILL_NAME"
+SKILL_DIR="$PROJECT_ROOT/.agents/skills/$SKILL_NAME"
 
 # 2. Check if skill exists
 if [ -d "$SKILL_DIR" ]; then
@@ -41,7 +41,7 @@ fi
 
 # 3. Create from template
 mkdir -p "$SKILL_DIR"
-cp "$PROJECT_ROOT/.agent/_template/SKILL.md" "$SKILL_DIR/SKILL.md"
+cp "$PROJECT_ROOT/.agents/skills/_template/SKILL.md" "$SKILL_DIR/SKILL.md"
 
 # 4. Replace placeholder
 if [[ "$OSTYPE" == "darwin"* ]]; then
@@ -50,13 +50,13 @@ else
     sed -i "s/skill-name-template/$SKILL_NAME/g" "$SKILL_DIR/SKILL.md"
 fi
 
-echo -e "  ${GREEN}✓${NC} Created skill at .agent/$SKILL_NAME/SKILL.md"
+echo -e "  ${GREEN}✓${NC} Created skill at .agents/skills/$SKILL_NAME/SKILL.md"
 
 # 5. Append to universal rules (best effort)
-RULES_FILE="$PROJECT_ROOT/.agent/rules/universal-agent-rules.md"
+RULES_FILE="$PROJECT_ROOT/.agents/rules/universal-agent-rules.md"
 if [ -f "$RULES_FILE" ]; then
-    echo -e "  ${YELLOW}i${NC} Remember to register this skill in .agent/rules/universal-agent-rules.md:"
-    echo -e "    | **$SKILL_NAME** | \`.agent/$SKILL_NAME/SKILL.md\` | [Description] |"
+    echo -e "  ${YELLOW}i${NC} Remember to register this skill in .agents/rules/universal-agent-rules.md:"
+    echo -e "    | **$SKILL_NAME** | \`.agents/skills/$SKILL_NAME/SKILL.md\` | [Description] |"
 fi
 
 echo -e "\n${GREEN}${BOLD}✅ Skill scaffolded successfully!${NC}"

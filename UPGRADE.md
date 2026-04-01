@@ -6,39 +6,107 @@
 
 ## Upgrade Philosophy
 
-This template is designed to be **forked and customized**. Your `Brain/` docs, rules, and skills contain project-specific content that should **never be overwritten**. Upgrades only add **new files** and **surgical edits** to existing ones.
+This template is designed to be **forked and customized**. Your `.specs/` docs, rules, and skills contain project-specific content that should **never be overwritten**. Upgrades only add **new files** and **surgical edits** to existing ones.
 
 > **Golden Rule:** We never overwrite your customized files. Upgrades are always additive.
 
 ---
 
+## v1.x → v2.0.0
+
+**What's new:** Complete migration from `Brain/` directory to `.specs/` architecture. This is a **breaking change** — the internal memory system was restructured for clarity and modularity.
+
+### What Changed
+
+| Before (v1.x) | After (v2.0.0) |
+|---|---|
+| `Brain/PROJECT_CORE.md` | `.specs/project/STACK.md` |
+| `Brain/ARCHITECTURE_DEEP_REVIEW.md` | `.specs/project/ARCHITECTURE.md` |
+| `Brain/DECISION_LOG.md` + `Brain/RISKS_ISSUES.md` | `.specs/project/STATE.md` (unified) |
+| `Brain/ACTIVE_TASKS.md` | `.specs/features/[feature]/tasks.md` |
+| `Brain/ROADMAP_SPRINTS.md` | `.specs/project/ROADMAP.md` |
+| `Brain/DESIGN_SYSTEM.md` | `.specs/project/CONVENTIONS.md` |
+| `Brain/TECHNICAL_SPEC.md` | `.specs/project/ARCHITECTURE.md` (merged) |
+| `Brain/STATUS_REPORT.md` | `.specs/project/STATE.md` (merged) |
+
+### Step 1: Create the new `.specs/` structure
+
+```bash
+mkdir -p .specs/project .specs/features
+```
+
+### Step 2: Migrate your data
+
+Move your filled Brain docs into the new structure:
+
+```bash
+# Core docs — copy content manually, file names changed
+# Brain/PROJECT_CORE.md        → .specs/project/STACK.md
+# Brain/ARCHITECTURE_DEEP_REVIEW.md → .specs/project/ARCHITECTURE.md
+# Brain/DECISION_LOG.md        → .specs/project/STATE.md (merge with RISKS_ISSUES)
+# Brain/ROADMAP_SPRINTS.md     → .specs/project/ROADMAP.md
+```
+
+> **Tip:** You can paste this prompt inside Antigravity to automate the migration:
+>
+> *"Migrate my Brain/ documents to the new .specs/ structure. Read each Brain doc and create the corresponding .specs/project/ file with the same content, adapted to the new naming convention. Then delete the Brain/ directory."*
+
+### Step 3: Update your rules (if customized)
+
+If you customized `.agents/rules/universal-agent-rules.md`, apply these changes:
+
+```diff
+ ## 1. CONTEXT & MEMORY PROTOCOL
+-**Root:** `Brain/` (Source of Truth).
++**Root:** `.specs/` (Source of Truth).
+
+-| **@PROJECT_CORE** | `Brain/PROJECT_CORE.md` | Scope, Goals, Tech Stack. |
+-| **@ARCHITECTURE** | `Brain/ARCHITECTURE_DEEP_REVIEW.md` | Technical deep dive. |
+-| **@ACTIVE_TASKS** | `Brain/ACTIVE_TASKS.md` | Task tracker. |
++| **@STACK** | `.specs/project/STACK.md` | Scope, Goals, Tech Stack. |
++| **@ARCHITECTURE** | `.specs/project/ARCHITECTURE.md` | Technical deep dive. |
++| **@TASKS** | `.specs/features/[feature]/tasks.md` | Feature task tracker. |
++| **@STATE** | `.specs/project/STATE.md` | Decisions, blockers, risks. |
+```
+
+### Step 4: Update your skills (if customized)
+
+Replace any `Brain/` paths in custom skills:
+
+```diff
+-1.  **Architecture:** `Brain/ARCHITECTURE_DEEP_REVIEW.md`
++1.  **Architecture:** `.specs/project/ARCHITECTURE.md`
+```
+
+### Step 5: Clean up
+
+```bash
+rm -rf Brain/
+```
+
+### Step 6: Verify
+
+Open Antigravity and ask: *"Read .specs/project/STACK.md and confirm you understand the project."*
+
+---
+
 ## v1.0.0 → v1.1.0
 
-**What's new:** Post-Execution Sync Workflow — automatic Brain & Skills updates after complex tasks.
+**What's new:** Post-Execution Sync Workflow — automatic spec & Skills updates after complex tasks.
 
 ### Step 1: Copy the new workflow file (safe — no conflicts)
 
 ```bash
-# From your project root, download the new workflow directly:
 curl -o .agents/workflows/post-execution-sync.md \
   https://raw.githubusercontent.com/henriquecaner/brain-agent/v1.1.0/.agents/workflows/post-execution-sync.md
 ```
-
-Or manually: copy [post-execution-sync.md](https://github.com/henriquecaner/brain-agent/blob/v1.1.0/.agents/workflows/post-execution-sync.md) into your `.agents/workflows/` folder.
 
 ### Step 2: Add Step 7 to your "Do Work" Loop
 
 Open `.agents/rules/universal-agent-rules.md` and find the **"Do Work" Loop** (§5.A). Add **line 7**:
 
 ```diff
- ### A. The "Do Work" Loop
- 1.  **Gate:** Pass Socratic Gate.
- 2.  **Skill:** Load relevant `.agents/skills/` skill.
- 3.  **Plan:** Update `@ACTIVE_TASKS` to `[IN PROGRESS]`.
- 4.  **Execute:** Write Code (Adhering to Skill + Universal Code Rules).
- 5.  **Verify:** Run checks (lint, type check, tests).
- 6.  **Document:** Update `@ACTIVE_TASKS` to `[DONE]`.
-+7.  **Sync:** For COMPLEX/ORCHESTRATE tasks, run `/post-execution-sync` workflow to update Brain docs and evaluate Skills.
++7.  **Sync:** For COMPLEX/ORCHESTRATE tasks, run `/post-execution-sync` workflow to update spec docs and evaluate Skills.
 ```
 
 ### Step 3: Add the routing entry
@@ -46,17 +114,8 @@ Open `.agents/rules/universal-agent-rules.md` and find the **"Do Work" Loop** (�
 In the same file, find the **Dynamic Skill Loading** table (§3) and add this row:
 
 ```diff
- | **Planning, Architecture** | `.agents/skills/create-plan/SKILL.md` | Project breakdown & roadmap. |
- | **Code Review, PR** | `.agents/skills/code-review/SKILL.md` | Code review checklist & patterns. |
- | **Debugging, Errors** | `.agents/skills/debugging/SKILL.md` | Systematic debugging workflow. |
-+| **Post-Execution, Sync** | `.agents/workflows/post-execution-sync.md` | Auto-sync Brain & Skills after changes. |
++| **Post-Execution, Sync** | `.agents/workflows/post-execution-sync.md` | Auto-sync specs & Skills after changes. |
 ```
-
-### Step 4: Verify
-
-That's it! Test by asking the AI to do a complex task and verifying it runs the sync at the end.
-
-> **Note:** The `post-execution-sync.md` workflow has sensible defaults. You can customize the trigger criteria and Brain update rules inside it to match your project's specific needs.
 
 ---
 
@@ -71,33 +130,12 @@ Each release in this repo includes:
 ### What's safe to upgrade (additive files)
 - **New workflows** in `.agents/workflows/` → Just copy them
 - **New skills** in `.agents/skills/` → Just copy the folder
-- **New Brain templates** in `Brain/` → Only copy if you don't have a file with the same name
+- **New spec templates** in `.specs/` → Only copy if you don't have a file with the same name
 
 ### What requires manual merge (customized files)
 - `.agents/rules/universal-agent-rules.md` → Follow the diff instructions per version
 - `.agents/rules/engineering-laws.md` → Follow the diff instructions per version
 
 ### What you can ignore (template docs)
-- `README.md`, `SETUP_GUIDE.md`, `CUSTOMIZATION.md` → These are for the template repo, not your project
-- `setup.sh`, `bin/*` → Only relevant for initial setup
-
----
-
-## Quick Upgrade via AI Prompt
-
-If you're using Antigravity, paste this prompt and the AI will handle the upgrade for you:
-
-### v1.0.0 → v1.1.0 Prompt
-
-> Upgrade the Brain + Agent architecture from v1.0.0 to v1.1.0. Do these 3 things and NOTHING else:
->
-> **1. Create this new file** at `.agents/workflows/post-execution-sync.md`:
-> Download it from https://raw.githubusercontent.com/henriquecaner/brain-agent/v1.1.0/.agents/workflows/post-execution-sync.md
->
-> **2. In `.agents/rules/universal-agent-rules.md`**, find the "Do Work" Loop (§5.A) and add this as Step 7 after Step 6:
-> `7.  **Sync:** For COMPLEX/ORCHESTRATE tasks, run /post-execution-sync workflow to update Brain docs and evaluate Skills.`
->
-> **3. In the same file**, find the Dynamic Skill Loading table (§3) and add this row after the Debugging row:
-> `| **Post-Execution, Sync** | .agents/workflows/post-execution-sync.md | Auto-sync Brain & Skills after changes. |`
->
-> Do NOT modify any Brain/ documents. Do NOT overwrite any customized content. Only add the new workflow file and the two lines above.
+- `README.md`, `CUSTOMIZATION.md` → These are for the template repo, not your project
+- `install.sh`, `bin/*` → Only relevant for initial setup

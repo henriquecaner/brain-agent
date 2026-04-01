@@ -56,34 +56,42 @@ What if your repository had its own persistent, structured brain?
 
 **Brain + Agent Architecture** is a framework that lives *inside* your Git repository. It gives your AI **persistent project memory** and **specialized agent skills** through the `.agents/` directory structure that tools like [Google Antigravity](https://blog.google/technology/google-labs/google-antigravity/) natively support.
 
-Before the AI writes a single line of code, it automatically reads your project's `Brain` to understand the scope, current tasks, and strict engineering rules.
+Before the AI writes a single line of code, it automatically reads your project's specs to understand the scope, current tasks, and strict engineering rules.
 
 ```text
 ┌─────────────────────────────────────────────────────────────┐
 │                    YOUR PROJECT ROOT                        │
 │                                                             │
-│  📁 Brain/                   ← Project State & Memory       │
-│  │  PROJECT_CORE.md          ← Scope, goals, tech stack     │
-│  │  ACTIVE_TASKS.md          ← Task tracker                 │
-│  │  ARCHITECTURE_DEEP_REVIEW ← Technical deep dive          │
-│  │  ...                                                     │
+│  📁 .specs/                  ← Project State & Memory       │
+│  │  📁 project/                                             │
+│  │  │  STACK.md              ← Scope, goals, tech stack     │
+│  │  │  ARCHITECTURE.md       ← Technical deep dive          │
+│  │  │  STATE.md              ← Decisions, blockers, risks   │
+│  │  │  CONVENTIONS.md        ← Coding rules & patterns      │
+│  │  │  ROADMAP.md            ← Milestones & timeline        │
+│  │  📁 features/                                            │
+│  │  │  📁 [feature-name]/                                   │
+│  │  │  │  spec.md            ← Feature specification        │
+│  │  │  │  tasks.md           ← Atomic task breakdown        │
 │                                                             │
 │  📁 .agents/                 ← AI Agent Configuration       │
 │  │  📁 rules/               ← Universal Laws (always on)    │
 │  │  │  universal-agent-rules ← Orchestrator behavior        │
 │  │  │  engineering-laws      ← Security & code standards    │
 │  │  📁 skills/              ← Specialized AI Skills         │
+│  │  │  📁 brain/            ← Planning & execution          │
 │  │  │  📁 code-review/      ← On-demand Review skill        │
 │  │  │  📁 debugging/        ← On-demand Debug skill         │
+│  │  │  📁 testing/          ← On-demand Test skill          │
 │  │  📁 workflows/           ← Automated Procedures          │
 │  │  │  global-workflow      ← Dev setup & commands          │
-│  │  │  post-execution-sync  ← Auto-sync Brain after work    │
+│  │  │  post-execution-sync  ← Auto-sync specs after work    │
 └─────────────────────────────────────────────────────────────┘
 ```
 
 **The Result:**
 - 📖 **Zero Context Loss:** The AI knows your exact tech stack and architectural decisions — every single chat.
-- ⚖️ **Enforced Standards:** Agent rules are **always on** — they run on every interaction, guaranteeing the AI respects your Brain, your security rules, and your architecture. No exceptions.
+- ⚖️ **Enforced Standards:** Agent rules are **always on** — they run on every interaction, guaranteeing the AI respects your specs, your security rules, and your architecture. No exceptions.
 - 🥷 **Dynamic Skills:** When you ask for help with code review, debugging, or testing, it silently loads the right skill and applies specialized knowledge on demand.
 
 > **Built for [Google Antigravity](https://blog.google/technology/google-labs/google-antigravity/)** — leveraging native support for `.agents/rules/`, `.agents/skills/`, and `.agents/workflows/`.
@@ -92,7 +100,7 @@ Before the AI writes a single line of code, it automatically reads your project'
 
 ## 🚀 Install (1 Minute)
 
-The install adds **only two folders** to your project: `Brain/` and `.agents/`. Nothing else.
+The install adds **only two folders** to your project: `.specs/` and `.agents/`. Nothing else.
 
 ### Option 1: One-liner (Recommended)
 
@@ -114,14 +122,16 @@ rm -rf /tmp/brain-agent
 
 ```text
 your-project/
-├── Brain/                    ← 9 markdown templates (empty, ready to fill)
-│   ├── PROJECT_CORE.md
-│   ├── ACTIVE_TASKS.md
-│   ├── ARCHITECTURE_DEEP_REVIEW.md
-│   └── ... (6 more)
+├── .specs/                   ← 5 spec templates (empty, ready to fill)
+│   └── project/
+│       ├── STACK.md
+│       ├── ARCHITECTURE.md
+│       ├── STATE.md
+│       ├── CONVENTIONS.md
+│       └── ROADMAP.md
 ├── .agents/
 │   ├── rules/                ← 2 always-on rule files
-│   ├── skills/               ← 5 pre-built skills (code-review, debugging, etc.)
+│   ├── skills/               ← 5 pre-built skills (brain, code-review, debugging, testing, template)
 │   └── workflows/            ← 2 workflow files
 └── (your existing files untouched)
 ```
@@ -140,48 +150,50 @@ your-project/
 
 Open Antigravity at your project root and paste this prompt:
 
-> **"Initialize Brain — this is an existing project. Deeply analyze the codebase and fill all Brain documents with the real architecture, stack, and patterns."**
+> **"Map codebase — this is an existing project. Deeply analyze the codebase and fill all .specs/ documents with the real architecture, stack, and patterns."**
 
 The AI will:
 1. Scan your entire codebase
-2. Auto-fill `Brain/PROJECT_CORE.md`, `ARCHITECTURE_DEEP_REVIEW.md`, and all other Brain docs
+2. Auto-fill `.specs/project/STACK.md`, `ARCHITECTURE.md`, and all other spec docs
 3. Configure skills and workflows for your specific stack
 
 ### 🅱️ Path B — You're starting from scratch
 
 Open Antigravity at your project root and paste this prompt:
 
-> **"Initialize Brain — this is a new project. Act as a Tech Lead: ask me strategic questions to define scope, tech stack, and goals before scaffolding anything."**
+> **"Initialize project — this is a new project. Act as a Tech Lead: ask me strategic questions to define scope, tech stack, and goals before scaffolding anything."**
 
 The AI will:
 1. Ask you strategic questions about your goal
-2. Draft the `Brain/PROJECT_CORE.md` and propose a `TECHNICAL_SPEC.md`
+2. Draft the `.specs/project/STACK.md` and propose an `ARCHITECTURE.md`
 3. Guide you through setting up the initial scaffolding
 
 > [!IMPORTANT]
-> **Don't skip initialization.** The Brain templates are intentionally empty — the AI fills them with your real project data. Without this step, the AI has no context to work with.
+> **Don't skip initialization.** The spec templates are intentionally empty — the AI fills them with your real project data. Without this step, the AI has no context to work with.
 
 ---
 
 ## ⚙️ How It Works (The 4 Pillars)
 
-### 1. 🧠 The Brain (`/Brain/`)
-**The concept:** AI assistants suffer from amnesia — they drop context over long chats. The `/Brain/` directory acts as a permanent memory bank that the AI reads *before* acting.
+### 1. 🧠 The Specs (`.specs/`)
+**The concept:** AI assistants suffer from amnesia — they drop context over long chats. The `.specs/` directory acts as a permanent memory bank that the AI reads *before* acting.
 
 The single source of truth for Project State. The AI reads this to know *what* we are building and *why*.
-- `PROJECT_CORE.md` — The exact tech stack and end goals. (Prevents the AI from suggesting Python in a TS repository).
-- `ACTIVE_TASKS.md` — Current tasks. The AI updates this as it finishes work, so you never lose track of what's next.
-- `ARCHITECTURE_DEEP_REVIEW.md` — The technical truth. The AI uses this to avoid breaking existing patterns.
+- `STACK.md` — The exact tech stack and end goals. (Prevents the AI from suggesting Python in a TS repository).
+- `ARCHITECTURE.md` — The technical truth. The AI uses this to avoid breaking existing patterns.
+- `STATE.md` — Decisions, blockers, risks, and lessons learned across sessions.
+- `CONVENTIONS.md` — Coding rules and patterns specific to your project.
+- `ROADMAP.md` — Milestones and timeline tracking.
 
-### 2. ⚖️ The Laws (`/.agents/rules/`) — Always On
-These are the **guardrails**. Unlike skills (which are on-demand), rules are **always active** — Antigravity loads them on every single interaction. This is what guarantees the AI will always read the Brain, follow your standards, and never go rogue.
+### 2. ⚖️ The Laws (`.agents/rules/`) — Always On
+These are the **guardrails**. Unlike skills (which are on-demand), rules are **always active** — Antigravity loads them on every single interaction. This is what guarantees the AI will always read the specs, follow your standards, and never go rogue.
 
 - `engineering-laws.md` — Enforces security boundaries, async rules, clean architecture, and testing standards. The AI **cannot** skip these.
-- `universal-agent-rules.md` — The "Orchestrator" that forces the AI to read the Brain before acting, and routes it to the right skills based on what you're asking.
+- `universal-agent-rules.md` — The "Orchestrator" that forces the AI to read the specs before acting, and routes it to the right skills based on what you're asking.
 
-> **This is the key insight:** The Brain holds the knowledge, but the Rules are what **enforce** it. Without always-on rules, the AI could simply ignore the Brain. With them, it can't.
+> **This is the key insight:** The specs hold the knowledge, but the Rules are what **enforce** it. Without always-on rules, the AI could simply ignore the specs. With them, it can't.
 
-### 3. 🎯 Agent Skills (`/.agents/skills/<skill>/`)
+### 3. 🎯 Agent Skills (`.agents/skills/<skill>/`)
 **The concept:** You can't put *every* rule in the main prompt, or the AI gets confused and slow. Skills solve this through **dynamic routing**.
 
 Agent Skills are **specialized, hyper-focused knowledge loaded strictly on-demand**.
@@ -189,15 +201,15 @@ If you ask the AI to "fix the padding on the login button", it detects the "fron
 
 Instead of one generic AI, you get a team of specialized experts (UI, Database, Security) that only activate when you need them.
 
-### 4. 🔄 Workflows (`/.agents/workflows/`) — Self-Healing Context
-**The concept:** Without automation, Brain docs and Skills go stale as the codebase evolves. Workflows keep the system **alive and accurate**.
+### 4. 🔄 Workflows (`.agents/workflows/`) — Self-Healing Context
+**The concept:** Without automation, spec docs and Skills go stale as the codebase evolves. Workflows keep the system **alive and accurate**.
 
-The key workflow is **`post-execution-sync`** — triggered automatically after every complex task. It analyzes what changed, updates the relevant Brain documents, and evaluates whether new Skills are needed.
+The key workflow is **`post-execution-sync`** — triggered automatically after every complex task. It analyzes what changed, updates the relevant spec documents, and evaluates whether new Skills are needed.
 
 - `global-workflow.md` — Dev environment setup and common commands.
-- `post-execution-sync.md` — **The self-healing loop** that keeps Brain & Skills in sync with reality.
+- `post-execution-sync.md` — **The self-healing loop** that keeps specs & Skills in sync with reality.
 
-> **Why this matters:** The Brain is only useful if it's accurate. This workflow ensures it *stays* accurate — automatically, without manual effort.
+> **Why this matters:** The specs are only useful if they're accurate. This workflow ensures they *stay* accurate — automatically, without manual effort.
 
 ```mermaid
 flowchart TD
@@ -210,13 +222,13 @@ flowchart TD
     F --> G["🔄 Post-Execution Sync"]
 
     G --> H["1. Analyze Impact"]
-    H --> I["2. Update Brain Docs"]
+    H --> I["2. Update Spec Docs"]
     I --> J["3. Evaluate Skills"]
     J --> K["4. Report Summary"]
 
-    I -.->|if architecture changed| L["ARCHITECTURE_DEEP_REVIEW.md"]
-    I -.->|if stack changed| M["PROJECT_CORE.md"]
-    I -.->|if decision made| N["DECISION_LOG.md"]
+    I -.->|if architecture changed| L["ARCHITECTURE.md"]
+    I -.->|if stack changed| M["STACK.md"]
+    I -.->|if decision made| N["STATE.md"]
     J -.->|if new domain found| O["Create new Skill"]
     J -.->|if pattern changed| P["Update existing Skill"]
 
@@ -231,7 +243,7 @@ flowchart TD
 
 ### Automatic: Post-Execution Sync
 
-For **complex tasks** (feature builds, refactors, architecture changes), the `post-execution-sync` workflow runs automatically. It updates Brain docs and evaluates Skills without manual effort.
+For **complex tasks** (feature builds, refactors, architecture changes), the `post-execution-sync` workflow runs automatically. It updates spec docs and evaluates Skills without manual effort.
 
 > You can also trigger it manually with `/post-execution-sync`.
 
@@ -241,12 +253,12 @@ For **simple fixes**, use this reference:
 
 | When This Happens... | Update This File |
 |----------------------|-----------------|
-| Task started or finished | `ACTIVE_TASKS.md` |
-| Architecture decision made | `DECISION_LOG.md` |
-| Major refactor completed | `ARCHITECTURE_DEEP_REVIEW.md` |
-| Sprint completed | `ROADMAP_SPRINTS.md` + `STATUS_REPORT.md` |
-| New risk identified | `RISKS_ISSUES.md` |
-| Design tokens changed | `DESIGN_SYSTEM.md` |
+| Task started or finished | `.specs/features/[feature]/tasks.md` |
+| Architecture decision made | `.specs/project/STATE.md` |
+| Major refactor completed | `.specs/project/ARCHITECTURE.md` |
+| Sprint completed | `.specs/project/ROADMAP.md` |
+| New risk identified | `.specs/project/STATE.md` |
+| Coding patterns changed | `.specs/project/CONVENTIONS.md` |
 
 ---
 

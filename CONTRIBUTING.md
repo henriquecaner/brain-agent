@@ -44,12 +44,14 @@ Whether you're a vibecoder, a builder, or a seasoned engineer — your contribut
 ### 📁 Project Structure
 
 ```
-Brain/          → Project state templates (markdown)
+.specs/          → Project state & memory (spec templates)
+  project/       → Stack, architecture, state, conventions, roadmap
+  features/      → Feature-level specs, designs, and tasks
 .agents/
-  rules/        → Universal AI rules (loaded automatically by Antigravity)
-  skills/       → Specialized AI skills (each in its own folder)
-  workflows/    → Step-by-step procedures (triggered by slash commands)
-bin/            → Utility scripts
+  rules/         → Universal AI rules (loaded automatically by Antigravity)
+  skills/        → Specialized AI skills (each in its own folder)
+  workflows/     → Step-by-step procedures (triggered by slash commands)
+bin/             → Utility scripts
 ```
 
 ### ✅ Before Submitting

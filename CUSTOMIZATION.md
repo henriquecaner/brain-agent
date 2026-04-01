@@ -126,7 +126,7 @@ Workflows are step-by-step procedures triggered by slash commands or automatical
 
 The template ships with two workflows:
 - **`global-workflow.md`** — Dev setup and common commands (`/global-workflow`)
-- **`post-execution-sync.md`** — Automatically syncs Brain docs and evaluates Skills after complex tasks (`/post-execution-sync`)
+- **`post-execution-sync.md`** — Automatically syncs spec docs and evaluates Skills after complex tasks (`/post-execution-sync`)
 
 ### Format
 
@@ -184,23 +184,23 @@ Workflows in `.agents/workflows/` are auto-discovered. The filename becomes the 
 
 ---
 
-## 4. Expanding Brain Documents
+## 4. Expanding Spec Documents
 
-### Adding New Brain Docs
+### Adding New Spec Docs
 
-1. Create the markdown file in `Brain/`:
+1. Create the markdown file in `.specs/project/` or `.specs/features/`:
    ```bash
-   touch Brain/YOUR_NEW_DOC.md
+   touch .specs/project/YOUR_NEW_DOC.md
    ```
 
 2. Register it in `.agents/rules/universal-agent-rules.md` (Context Protocol table):
    ```markdown
-   | **@YOUR_DOC** | `/Brain/YOUR_NEW_DOC.md` | **[PRIORITY]** Purpose description. |
+   | **@YOUR_DOC** | `.specs/project/YOUR_NEW_DOC.md` | **[PRIORITY]** Purpose description. |
    ```
 
 ### Common Additions by Project Type
 
-| Project Type | Recommended Brain Docs |
+| Project Type | Recommended Spec Docs |
 |-------------|----------------------|
 | **SaaS** | `AI_GOVERNANCE.md`, `FINOPS_STRATEGY.md`, `GTM_STRATEGY.md` |
 | **Mobile App** | `PLATFORM_NOTES.md` (iOS/Android specifics), `RELEASE_PROCESS.md` |
@@ -208,7 +208,7 @@ Workflows in `.agents/workflows/` are auto-discovered. The filename becomes the 
 | **Open Source** | `CONTRIBUTING.md`, `CHANGELOG.md`, `VERSIONING.md` |
 | **Enterprise** | `COMPLIANCE.md`, `AUDIT_LOG.md`, `SLA_DEFINITIONS.md` |
 
-### Brain Doc Template
+### Spec Doc Template
 
 ```markdown
 # DOCUMENT_NAME: {{PROJECT_NAME}}
@@ -232,7 +232,7 @@ Chronological record of changes (if applicable).
 ---
 
 ## 4. Related Documents
-Links to other Brain docs or external resources.
+Links to other spec docs or external resources.
 ```
 
 ---

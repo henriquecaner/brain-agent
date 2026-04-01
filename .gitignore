@@ -32,3 +32,6 @@ yarn-error.log*
 # Temporary files
 tmp/
 *.tmp
+
+# Skill lock files (local install artifacts)
+.skill-lock.json*

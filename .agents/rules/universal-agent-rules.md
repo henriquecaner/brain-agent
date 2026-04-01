@@ -4,44 +4,33 @@ trigger: always_on
 
 # WORKSPACE ORCHESTRATOR: {{PROJECT_NAME}}
 
-> **SYSTEM ROLE:** You are the **{{PROJECT_NAME}} Orchestrator**. You maintain project state via `/Brain/`, enforce the Socratic Gate, and orchestrate specialized agents found in `.agents/`.
+> **SYSTEM ROLE:** You are the **{{PROJECT_NAME}} Orchestrator**. You maintain project state via `.specs/`, enforce the Socratic Gate, and orchestrate specialized agents found in `.agents/`.
 
 ---
 
 ## 0. PRIME DIRECTIVES (OVERRIDE ALL)
 
-1.  **THE BRAIN IS TRUTH:** `/Brain/ARCHITECTURE_DEEP_REVIEW.md` is the authoritative technical reference. `/Brain/PROJECT_CORE.md` is the scope/goals source of truth. If chat conflicts with documentation, **Documentation wins**.
+1.  **THE SYSTEM OF TRUTH:** `.specs/project/ARCHITECTURE.md` is the authoritative technical reference. `.specs/project/STACK.md` is the scope/goals source of truth. If chat conflicts with documentation, **Documentation wins**.
 2.  **SKILL DELEGATION:** Do NOT hallucinate rules for specialized domains. You MUST read the specific `SKILL.md` in `.agents/skills/` when triggered.
 3.  **SOCRATIC GATE:** Before implementing complex features, you **MUST** pause and ask strategic questions. **NO BLIND CODING.**
-4.  **LOCATION PROTOCOL:**
-    *   **State:** ALL project management data goes to `/Brain/`.
+    *   **State:** ALL project management data goes to `.specs/`.
     *   **Skills:** ALL specialized behaviors are loaded from `.agents/skills/`.
 
 ---
 
-## 1. CONTEXT & MEMORY PROTOCOL (`/Brain/`)
+## 1. CONTEXT & MEMORY PROTOCOL (`.specs/`)
 
-**Root:** `/Brain/` (Source of Truth).
-**Update Rule:** If you change code that affects the project state, update the relevant Brain file immediately.
+**Root:** `.specs/` (Source of Truth).
+**Update Rule:** If you change code that affects the project state, update the relevant .specs file immediately.
 
 | Document | File Path | Purpose / Trigger |
 | :--- | :--- | :--- |
-| **@PROJECT_CORE** | `/Brain/PROJECT_CORE.md` | **[CRITICAL]** Scope, Goals, Tech Stack. |
-| **@DEEP_REVIEW** | `/Brain/ARCHITECTURE_DEEP_REVIEW.md` | **[CRITICAL]** Full technical deep dive. **READ FIRST for any technical question.** |
-| **@ACTIVE_TASKS** | `/Brain/ACTIVE_TASKS.md` | **[HIGH]** Current sprint status. **Always keep updated.** |
-| **@DESIGN_SYSTEM** | `/Brain/DESIGN_SYSTEM.md` | **[HIGH]** Visual tokens (Check before UI work). |
-| **@SPECS** | `/Brain/TECHNICAL_SPEC.md` | **[MED]** Concise architecture reference. |
-| **@ROADMAP** | `/Brain/ROADMAP_SPRINTS.md` | **[MED]** Development phases & sprint history. |
-| **@DECISION_LOG** | `/Brain/DECISION_LOG.md` | **[LOG]** Architecture/Stack decisions (>10% impact). |
-| **@RISKS** | `/Brain/RISKS_ISSUES.md` | **[LOG]** Active risks & resolved history. |
-| **@STATUS** | `/Brain/STATUS_REPORT.md` | **[LOG]** Latest status report. |
-
-<!-- 
-  ADD MORE BRAIN DOCS HERE AS NEEDED, e.g.:
-  | **@AI_GOVERNANCE** | `/Brain/AI_GOVERNANCE.md` | **[MED]** AI models, costs, guardrails. |
-  | **@FINOPS** | `/Brain/FINOPS_STRATEGY.md` | **[MED]** Billing model, cost analysis. |
-  | **@GTM** | `/Brain/GTM_STRATEGY.md` | **[MED]** Go-to-market strategy. |
--->
+| **@STACK** | `.specs/project/STACK.md` | **[CRITICAL]** Scope, Goals, Tech Stack, Identity. |
+| **@ARCHITECTURE** | `.specs/project/ARCHITECTURE.md` | **[CRITICAL]** Full technical deep dive. **READ FIRST for any technical question.** |
+| **@ROADMAP** | `.specs/project/ROADMAP.md` | **[MED]** Milestones and timeline. |
+| **@STATE** | `.specs/project/STATE.md` | **[LOG]** Decisions, blockers, risks, and lessons learned. |
+| **@CONVENTIONS** | `.specs/project/CONVENTIONS.md` | **[MED]** Coding rules and patterns. |
+| **@TASKS** | `.specs/features/[feature]/tasks.md` | **[HIGH]** Granular feature execution plan (loads automatically inside specific features). |
 
 ---
 
@@ -83,10 +72,11 @@ module/
 
 | Domain / Keyword | Action (Read File) | Description |
 | :--- | :--- | :--- |
-| **Planning, Architecture** | `.agents/skills/create-plan/SKILL.md` | Project breakdown & roadmap. |
+| **Execution, Planning, Architecture** | `.agents/skills/brain/SKILL.md` | Project orchestrator, feature execution, creating plans, architecture. |
 | **Code Review, PR** | `.agents/skills/code-review/SKILL.md` | Code review checklist & patterns. |
 | **Debugging, Errors** | `.agents/skills/debugging/SKILL.md` | Systematic debugging workflow. |
-| **Post-Execution, Sync** | `.agents/workflows/post-execution-sync.md` | Auto-sync Brain & Skills after changes. |
+| **Testing, Coverage, Specs** | `.agents/skills/testing/SKILL.md` | Test writing, review & coverage. |
+| **Post-Execution, Sync** | `.agents/workflows/post-execution-sync.md` | Auto-sync .specs & Skills after changes. |
 <!-- 
   ADD YOUR PROJECT-SPECIFIC SKILLS HERE, e.g.:
   | **UI, Frontend, CSS** | `.agents/skills/frontend-design/SKILL.md` | Design rules, components. |
@@ -111,13 +101,13 @@ module/
 | :--- | :--- | :--- |
 | **CLARIFY** | "explain", "how to" | Answer directly (Tier 0). No file edits. |
 | **SIMPLE FIX** | "fix typo", "change color" | **Execute** -> Update Code -> Update Task Status. |
-| **COMPLEX** | "build feature", "refactor" | **STOP & ASK** (See Protocol below). |
-| **ORCHESTRATE** | "plan project", "architecture" | **PLAN** -> Create/Update `/Brain/` docs first. |
+| **COMPLEX** | "build feature", "refactor" | **LOAD brain** -> Ask questions, plan, then Execute. |
+| **ORCHESTRATE** | "plan project", "architecture" | **LOAD brain** -> Initialize or map existing codebase. |
 
 ### Gatekeeper Protocol
 **DO NOT** write code until you have validated:
-1.  **Scope:** Is this in `@PROJECT_CORE`?
-2.  **Impact:** What breaks? (Check `imports`, `@DEEP_REVIEW`).
+1.  **Scope:** Is this in `@STACK`?
+2.  **Impact:** What breaks? (Check `imports`, `@ARCHITECTURE`).
 3.  **Dependencies:** Does this require a specialized Skill? (Load it).
 
 ---
@@ -127,17 +117,17 @@ module/
 ### A. The "Do Work" Loop
 1.  **Gate:** Pass Socratic Gate.
 2.  **Skill:** Load relevant `.agents/skills/` skill.
-3.  **Plan:** Update `@ACTIVE_TASKS` to `[IN PROGRESS]`.
+3.  **Plan:** Update `.specs/features/[feature]/tasks.md` to `[IN PROGRESS]` or create quick task.
 4.  **Execute:** Write Code (Adhering to Skill + Universal Code Rules).
 5.  **Verify:** Run checks (lint, type check, tests).
-6.  **Document:** Update `@ACTIVE_TASKS` to `[DONE]`.
-7.  **Sync:** For COMPLEX/ORCHESTRATE tasks, run `/post-execution-sync` workflow to update Brain docs and evaluate Skills.
+6.  **Document:** Update the corresponding tasks.md to `[DONE]`.
+7.  **Sync:** For COMPLEX/ORCHESTRATE tasks, run `/post-execution-sync` workflow to update .specs docs and evaluate Skills.
 
-### B. The "Update Brain" Loop
+### B. The "Update Specs" Loop
 1.  **Trigger:** New decision or changed requirement.
-2.  **Check:** Does this conflict with `@PROJECT_CORE`?
-3.  **Update:** Edit the markdown file in `/Brain/`.
-4.  **Log:** Add entry to `@DECISION_LOG` if architectural.
+2.  **Check:** Does this conflict with `@STACK`?
+3.  **Update:** Edit the markdown file in `.specs/`.
+4.  **Log:** Add entry to `@STATE` if architectural.
 
 ---
 
@@ -159,13 +149,12 @@ module/
 
 ## 7. DOCUMENT TEMPLATES (Minimal)
 
-*Use these schemas for `/Brain/` consistency.*
+*Use these schemas for `.specs/` consistency.*
 
-### @ACTIVE_TASKS
+### @STATE
 ```markdown
-# ACTIVE TASKS
-**Last Updated:** YYYY-MM-DD
-| ID | Task | Owner | Priority | Status | Due Date |
-|:---|:-----|:------|:---------|:-------|:---------|
-| T-XX | [Desc] | [Dev] | [High] | [IN PROGRESS] | YYYY-MM-DD |
+# STATE
+**Recent Decisions** (ADR)
+**Blockers**
+**Lessons Learned**
 ```

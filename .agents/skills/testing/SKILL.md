@@ -13,8 +13,8 @@ author: {{PROJECT_NAME}}
 
 ## 1. CONTEXT PROTOCOL (Read First)
 Before writing tests, you MUST read/verify:
-1.  **Engineering Laws:** `.agent/rules/engineering-laws.md` — To understand the core testing standards (Coverage, AAA pattern).
-2.  **Tech Spec:** `Brain/TECHNICAL_SPEC.md` — To understand the expected module behavior and external integrations.
+1.  **Engineering Laws:** `.agents/rules/engineering-laws.md` — To understand the core testing standards (Coverage, AAA pattern).
+2.  **Architecture / Tech Spec:** `.specs/project/ARCHITECTURE.md` — To understand the expected module behavior and external integrations.
 
 ---
 

@@ -49,4 +49,4 @@ npm run build
 
 - Always run the full check suite before pushing.
 - Never commit `.env.local` — it's in `.gitignore`.
-- Update `Brain/ACTIVE_TASKS.md` when starting or finishing work.
+- Update `.specs/features/[feature]/tasks.md` when starting or finishing work.

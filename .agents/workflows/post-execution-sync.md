@@ -1,5 +1,5 @@
 ---
-description: Post-execution context sync — automatically analyzes changes and updates Brain docs and Skills after complex tasks
+description: Post-execution context sync — automatically analyzes changes and updates Spec docs and Skills after complex tasks
 ---
 
 # Post-Execution Sync Workflow
@@ -40,33 +40,31 @@ CHECKLIST:
 
 ---
 
-## Step 2: Update Brain Documents
+## Step 2: Update Spec Documents
 
-Based on the impact analysis, update **only** the relevant Brain docs:
+Based on the impact analysis, update **only** the relevant Spec docs:
 
 ### Priority: CRITICAL (always check)
 
 | Condition | Action |
 |-----------|--------|
-| Task was tracked in `@ACTIVE_TASKS` | Mark as `[DONE]`, update date |
-| Any architectural change | Update `@ARCHITECTURE_DEEP_REVIEW` with new structure |
+| Task was tracked in `tasks.md` | Mark as `[DONE]`, update date |
+| Any architectural change | Update `@ARCHITECTURE` with new structure |
 
 ### Priority: HIGH (check if applicable)
 
 | Condition | Action |
 |-----------|--------|
-| Tech stack changed (new lib, tool, service) | Update `@PROJECT_CORE` tech stack section |
-| UI/design tokens changed | Update `@DESIGN_SYSTEM` |
-| New API, schema, or data model | Update `@TECHNICAL_SPEC` |
+| Tech stack changed (new lib, tool, service) | Update `@STACK` tech stack section |
+| UI/design tokens changed | Update `DESIGN_SYSTEM` |
 
 ### Priority: LOGGED (append if applicable)
 
 | Condition | Action |
 |-----------|--------|
-| Architectural/stack decision was made | Append to `@DECISION_LOG` with date, context, and rationale |
-| New risk identified during implementation | Append to `@RISKS_ISSUES` |
-| Sprint milestone reached | Update `@ROADMAP_SPRINTS` |
-| Significant status change | Update `@STATUS_REPORT` |
+| Architectural/stack decision was made | Append to `@STATE` |
+| New risk identified during implementation | Append to `@STATE` |
+| Sprint milestone reached | Update `@ROADMAP` |
 
 ---
 
@@ -101,8 +99,8 @@ After syncing, provide a brief summary to the user:
 ```markdown
 ## 🔄 Post-Execution Sync Complete
 
-**Brain Updates:**
-- [list of Brain docs updated, or "None needed"]
+**Spec Updates:**
+- [list of .specs/ docs updated, or "None needed"]
 
 **Skills:**
 - [new skills created, existing skills updated, or "No changes needed"]
@@ -116,6 +114,6 @@ After syncing, provide a brief summary to the user:
 ## Notes
 
 - **Be surgical:** Only update docs that are actually affected. Do not rewrite entire documents.
-- **Preserve history:** When updating `@DECISION_LOG` or `@RISKS_ISSUES`, always append — never overwrite past entries.
-- **Minimal diffs:** Update the specific section within a Brain doc, not the whole file.
+- **Preserve history:** When updating `@STATE`, always append — never overwrite past entries.
+- **Minimal diffs:** Update the specific section within a Spec doc, not the whole file.
 - **User confirmation:** If unsure whether a change warrants a new Skill, ask the user before creating one.

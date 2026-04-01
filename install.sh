@@ -3,7 +3,7 @@
 # ============================================================
 # Brain + Agent Architecture — Install Script
 # ============================================================
-# Copies Brain/ and .agents/ to the current directory.
+# Copies .specs/ and .agents/ to the current directory.
 # Non-interactive. Safe to pipe from curl.
 #
 # Usage:
@@ -47,8 +47,8 @@ fi
 
 # ── Check for existing directories ──
 EXISTING=""
-if [ -d "$TARGET_DIR/Brain" ]; then
-    EXISTING="${EXISTING} Brain/"
+if [ -d "$TARGET_DIR/.specs" ]; then
+    EXISTING="${EXISTING} .specs/"
 fi
 if [ -d "$TARGET_DIR/.agents" ]; then
     EXISTING="${EXISTING} .agents/"
@@ -67,10 +67,14 @@ echo -e "  ${BLUE}Downloading...${NC}"
 git clone --quiet --depth 1 "$REPO_URL" "$TMP_DIR" 2>/dev/null
 
 echo -e "  ${BLUE}Installing...${NC}"
-cp -r "$TMP_DIR/Brain/" "$TARGET_DIR/Brain/"
+cp -r "$TMP_DIR/.specs/" "$TARGET_DIR/.specs/"
 cp -r "$TMP_DIR/.agents/" "$TARGET_DIR/.agents/"
 
-echo -e "  ${GREEN}✓${NC} Created Brain/"
+# Clean up install artifacts that shouldn't be in user projects
+rm -f "$TARGET_DIR/.agents/.skill-lock.json"
+rm -f "$TARGET_DIR/.agents/.skill-lock.json.backup"
+
+echo -e "  ${GREEN}✓${NC} Created .specs/project/ (5 templates)"
 echo -e "  ${GREEN}✓${NC} Created .agents/rules/"
 echo -e "  ${GREEN}✓${NC} Created .agents/skills/"
 echo -e "  ${GREEN}✓${NC} Created .agents/workflows/"
@@ -85,12 +89,12 @@ echo ""
 echo -e "  Paste ${BOLD}ONE${NC} of these prompts ${RED}${BOLD}inside Antigravity${NC} (not here!):"
 echo ""
 echo -e "  ${BOLD}Path A — Existing project:${NC}"
-echo -e "  ${GREEN}\"Initialize Brain — this is an existing project. Deeply analyze${NC}"
-echo -e "  ${GREEN}the codebase and fill all Brain documents with the real${NC}"
+echo -e "  ${GREEN}\"Map codebase — this is an existing project. Deeply analyze${NC}"
+echo -e "  ${GREEN}the codebase and fill all .specs/ documents with the real${NC}"
 echo -e "  ${GREEN}architecture, stack, and patterns.\"${NC}"
 echo ""
 echo -e "  ${BOLD}Path B — New project:${NC}"
-echo -e "  ${GREEN}\"Initialize Brain — this is a new project. Act as a Tech Lead:${NC}"
+echo -e "  ${GREEN}\"Initialize project — this is a new project. Act as a Tech Lead:${NC}"
 echo -e "  ${GREEN}ask me strategic questions to define scope, tech stack, and${NC}"
 echo -e "  ${GREEN}goals before scaffolding anything.\"${NC}"
 echo ""
