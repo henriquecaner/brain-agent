@@ -9,6 +9,7 @@
 [![GitHub issues](https://img.shields.io/github/issues/henriquecaner/brain-agent)](https://github.com/henriquecaner/brain-agent/issues)
 [![Last Commit](https://img.shields.io/github/last-commit/henriquecaner/brain-agent)](https://github.com/henriquecaner/brain-agent/commits/main)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](./CONTRIBUTING.md)
+[![Lint](https://github.com/henriquecaner/brain-agent/actions/workflows/lint.yml/badge.svg)](https://github.com/henriquecaner/brain-agent/actions/workflows/lint.yml)
 
 <br/>
 
