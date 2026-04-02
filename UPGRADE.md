@@ -46,8 +46,15 @@ Open Antigravity (or your AI of choice) at the root of your project and paste th
 > **   - Migrate `Brain/ROADMAP_SPRINTS.md` to `.specs/project/ROADMAP.md`**
 > **   - Migrate `Brain/DESIGN_SYSTEM.md` to `.specs/project/CONVENTIONS.md`**
 > **4. Delete the obsolete `Brain/` directory.**
-> **5. Update my `.agents/rules/universal-agent-rules.md` to point root to `.specs/` and map the new spec files in the memory protocol.**
-> **6. Scan `.agents/skills/` and replace any `Brain/` path references with their new `.specs/project/` equivalents.**
+> **5. Download the latest v2.0.0 template via terminal:**
+> **   Run: `git clone --depth 1 https://github.com/henriquecaner/brain-agent.git /tmp/brain-v2`**
+> **6. Copy the new advanced v2.0 skills and workflows:**
+> **   - Force overwrite your local `.agents/skills/brain/` with `/tmp/brain-v2/.agents/skills/brain/`**
+> **   - Copy `/tmp/brain-v2/.agents/skills/testing/` to your `.agents/skills/`**
+> **   - Overwrite your local `.agents/workflows/` with `/tmp/brain-v2/.agents/workflows/`**
+> **   - Clean up: `rm -rf /tmp/brain-v2`**
+> **7. Update my `.agents/rules/universal-agent-rules.md` to point root to `.specs/`, map the new spec files, AND ensure the new `testing` skill is registered in the routing table.**
+> **8. Scan all my local `.agents/skills/` and replace any `Brain/` path references with their new `.specs/project/` equivalents.**
 > 
 > **Please present your implementation plan first for my approval before executing any file creations or modifications."**
 
