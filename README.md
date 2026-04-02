@@ -100,6 +100,8 @@ Before the AI writes a single line of code, it automatically reads your project'
 
 ## 🚀 Install (1 Minute)
 
+> **Already using v1.x?** You can automatically upgrade your project memory to v2.0.0 simply by asking the AI! Check out the [Upgrade Guide](./UPGRADE.md) for the Master Prompt.
+
 The install adds **only two folders** to your project: `.specs/` and `.agents/`. Nothing else.
 
 ### Option 1: One-liner (Recommended)
