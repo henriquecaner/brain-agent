@@ -29,13 +29,43 @@ This template is designed to be **forked and customized**. Your `.specs/` docs, 
 | `Brain/TECHNICAL_SPEC.md` | `.specs/project/ARCHITECTURE.md` (merged) |
 | `Brain/STATUS_REPORT.md` | `.specs/project/STATE.md` (merged) |
 
-### Step 1: Create the new `.specs/` structure
+### Option A: The AI-Automated Migration (Recommended)
+
+Since you are using the Brain+Agent architecture, why do this manually? You can use your AI's planning mode to execute the entire migration for you safely.
+
+Open Antigravity (or your AI of choice) at the root of your project and paste this **Master Prompt**:
+
+> **"I need to upgrade my project's Brain-Agent architecture from v1.x to v2.0.0. Please enter your step-by-step planning mode to perform the following actions:**
+> 
+> **1. Create the new `.specs/project` and `.specs/features` directories.**
+> **2. Read the contents of all my existing markdown files in the `Brain/` directory.**
+> **3. Migrate the data to the new structure:**
+> **   - Migrate `Brain/PROJECT_CORE.md` to `.specs/project/STACK.md`**
+> **   - Migrate `Brain/ARCHITECTURE_DEEP_REVIEW.md` and `Brain/TECHNICAL_SPEC.md` into a unified `.specs/project/ARCHITECTURE.md`**
+> **   - Migrate `Brain/DECISION_LOG.md`, `Brain/RISKS_ISSUES.md`, and `Brain/STATUS_REPORT.md` into a unified `.specs/project/STATE.md`**
+> **   - Migrate `Brain/ROADMAP_SPRINTS.md` to `.specs/project/ROADMAP.md`**
+> **   - Migrate `Brain/DESIGN_SYSTEM.md` to `.specs/project/CONVENTIONS.md`**
+> **4. Delete the obsolete `Brain/` directory.**
+> **5. Update my `.agents/rules/universal-agent-rules.md` to point root to `.specs/` and map the new spec files in the memory protocol.**
+> **6. Scan `.agents/skills/` and replace any `Brain/` path references with their new `.specs/project/` equivalents.**
+> 
+> **Please present your implementation plan first for my approval before executing any file creations or modifications."**
+
+*Once the AI finishes completing the steps above, your upgrade to v2.0.0 is complete!*
+
+---
+
+### Option B: The Manual Migration
+
+If you prefer to migrate files by hand instead of using the automated Master Prompt, follow the steps below:
+
+#### Step 1: Create the new `.specs/` structure
 
 ```bash
 mkdir -p .specs/project .specs/features
 ```
 
-### Step 2: Migrate your data
+#### Step 2: Migrate your data
 
 Move your filled Brain docs into the new structure:
 
@@ -47,11 +77,7 @@ Move your filled Brain docs into the new structure:
 # Brain/ROADMAP_SPRINTS.md     → .specs/project/ROADMAP.md
 ```
 
-> **Tip:** You can paste this prompt inside Antigravity to automate the migration:
->
-> *"Migrate my Brain/ documents to the new .specs/ structure. Read each Brain doc and create the corresponding .specs/project/ file with the same content, adapted to the new naming convention. Then delete the Brain/ directory."*
-
-### Step 3: Update your rules (if customized)
+#### Step 3: Update your rules (if customized)
 
 If you customized `.agents/rules/universal-agent-rules.md`, apply these changes:
 
@@ -69,7 +95,7 @@ If you customized `.agents/rules/universal-agent-rules.md`, apply these changes:
 +| **@STATE** | `.specs/project/STATE.md` | Decisions, blockers, risks. |
 ```
 
-### Step 4: Update your skills (if customized)
+#### Step 4: Update your skills (if customized)
 
 Replace any `Brain/` paths in custom skills:
 
@@ -78,13 +104,13 @@ Replace any `Brain/` paths in custom skills:
 +1.  **Architecture:** `.specs/project/ARCHITECTURE.md`
 ```
 
-### Step 5: Clean up
+#### Step 5: Clean up
 
 ```bash
 rm -rf Brain/
 ```
 
-### Step 6: Verify
+#### Step 6: Verify
 
 Open Antigravity and ask: *"Read .specs/project/STACK.md and confirm you understand the project."*
 
