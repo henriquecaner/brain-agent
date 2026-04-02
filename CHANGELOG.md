@@ -45,6 +45,7 @@ The internal memory system has been completely restructured. The `Brain/` direct
 - 🗑️ **`concerns.md`** — Redundant reference file removed (content consolidated into `STATE.md`)
 
 ### Fixed
+- 🐛 **`install.sh`** — Fixed critical blocker where the script would completely abort if `.agents/` or `.specs/` already existed (very common for Antigravity users). Upgraded to use non-destructive safe merge (`cp -Rn`), allowing seamless, incremental updates without overwriting user customizations.
 - 🐛 **`install.sh`** — Was trying to copy non-existent `Brain/` directory, causing installation failure
 - 🐛 **`create-skill.sh`** — Used `.agent/` (singular) instead of `.agents/` (plural), making skill creation completely broken
 - 🐛 **`context-limits.md`** — Referenced obsolete file names (`ARCHITECTURE_DEEP_REVIEW.md`, `DESIGN_SYSTEM.md`)

@@ -31,32 +31,33 @@ This template is designed to be **forked and customized**. Your `.specs/` docs, 
 
 ### Option A: The AI-Automated Migration (Recommended)
 
-Since you are using the Brain+Agent architecture, why do this manually? You can use your AI's planning mode to execute the entire migration for you safely.
+Since you are using the Brain+Agent architecture, you can execute the entire migration effortlessly with your AI using a two-step process.
 
-Open Antigravity (or your AI of choice) at the root of your project and paste this **Master Prompt**:
+#### Step 1: Inject v2.0 dependencies safely
+Run the installation script in your terminal to securely pull the new `brain` skill, `testing` skill, and pipelines.
+*(Since v2.0, the script performs a "safe merge" and will **not** overwrite any custom `.agents/rules/` you previously built).*
 
-> **"I need to upgrade my project's Brain-Agent architecture from v1.x to v2.0.0. Please enter your step-by-step planning mode to perform the following actions:**
+```bash
+curl -fsSL https://raw.githubusercontent.com/henriquecaner/brain-agent/main/install.sh | bash
+```
+
+#### Step 2: The Master Prompt (Data Migration)
+Open Antigravity (or your AI of choice) at the root of your project and paste this **Master Prompt** to migrate your legacy `Brain/` documents to the new `.specs/` layout:
+
+> **"I need to finalize my project's data migration from Brain v1.x to v2.0.0. Please enter your step-by-step planning mode to perform the following actions:**
 > 
-> **1. Create the new `.specs/project` and `.specs/features` directories.**
-> **2. Read the contents of all my existing markdown files in the `Brain/` directory.**
-> **3. Migrate the data to the new structure:**
+> **1. Read the contents of all my existing markdown files in the legacy `Brain/` directory.**
+> **2. Migrate the data to the new structure:**
 > **   - Migrate `Brain/PROJECT_CORE.md` to `.specs/project/STACK.md`**
 > **   - Migrate `Brain/ARCHITECTURE_DEEP_REVIEW.md` and `Brain/TECHNICAL_SPEC.md` into a unified `.specs/project/ARCHITECTURE.md`**
 > **   - Migrate `Brain/DECISION_LOG.md`, `Brain/RISKS_ISSUES.md`, and `Brain/STATUS_REPORT.md` into a unified `.specs/project/STATE.md`**
 > **   - Migrate `Brain/ROADMAP_SPRINTS.md` to `.specs/project/ROADMAP.md`**
 > **   - Migrate `Brain/DESIGN_SYSTEM.md` to `.specs/project/CONVENTIONS.md`**
-> **4. Delete the obsolete `Brain/` directory.**
-> **5. Download the latest v2.0.0 template via terminal:**
-> **   Run: `git clone --depth 1 https://github.com/henriquecaner/brain-agent.git /tmp/brain-v2`**
-> **6. Copy the new advanced v2.0 skills and workflows:**
-> **   - Force overwrite your local `.agents/skills/brain/` with `/tmp/brain-v2/.agents/skills/brain/`**
-> **   - Copy `/tmp/brain-v2/.agents/skills/testing/` to your `.agents/skills/`**
-> **   - Overwrite your local `.agents/workflows/` with `/tmp/brain-v2/.agents/workflows/`**
-> **   - Clean up: `rm -rf /tmp/brain-v2`**
-> **7. Update my `.agents/rules/universal-agent-rules.md` to point root to `.specs/`, map the new spec files, AND ensure the new `testing` skill is registered in the routing table.**
-> **8. Scan all my local `.agents/skills/` and replace any `Brain/` path references with their new `.specs/project/` equivalents.**
+> **3. Delete the obsolete `Brain/` directory.**
+> **4. Open my `.agents/rules/universal-agent-rules.md` file and update its Context Protocol routing to point to the new `.specs/` spec files you just populated.**
+> **5. Scan all my local `.agents/skills/` files and replace any legacy `Brain/` path references with their new `.specs/project/` equivalents.**
 > 
-> **Please present your implementation plan first for my approval before executing any file creations or modifications."**
+> **Please present your implementation plan first for my approval before executing any file deletions or document rewrites."**
 
 *Once the AI finishes completing the steps above, your upgrade to v2.0.0 is complete!*
 

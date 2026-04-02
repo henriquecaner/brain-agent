@@ -139,6 +139,8 @@ your-project/
 ```
 
 > **That's it.** No config files, no `npm install`, no build step. Just markdown files that your AI reads automatically.
+> 
+> 🛡️ **Safe Merge Architecture:** If your project already has an `.agents/` folder (such as those natively created by Antigravity), the `install.sh` script employs a "no-clobber" safe merge. It will dynamically inject only the missing framework components and will **never** overwrite your existing custom rules or files.
 
 ---
 
