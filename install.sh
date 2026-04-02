@@ -55,11 +55,9 @@ if [ -d "$TARGET_DIR/.agents" ]; then
 fi
 
 if [ -n "$EXISTING" ]; then
-    echo -e "${YELLOW}⚠️  Already exists:${EXISTING}${NC}"
-    echo -e "${YELLOW}   Remove them first if you want a fresh install.${NC}"
-    echo -e "${YELLOW}   Aborting to avoid overwriting your data.${NC}"
+    echo -e "${YELLOW}⚠️  Note: Found existing${EXISTING} folders.${NC}"
+    echo -e "${YELLOW}   Performing safe merge. Your existing files will NOT be overwritten.${NC}"
     echo ""
-    exit 1
 fi
 
 # ── Clone and copy ──
@@ -67,8 +65,12 @@ echo -e "  ${BLUE}Downloading...${NC}"
 git clone --quiet --depth 1 "$REPO_URL" "$TMP_DIR" 2>/dev/null
 
 echo -e "  ${BLUE}Installing...${NC}"
-cp -r "$TMP_DIR/.specs/" "$TARGET_DIR/.specs/"
-cp -r "$TMP_DIR/.agents/" "$TARGET_DIR/.agents/"
+mkdir -p "$TARGET_DIR/.specs"
+mkdir -p "$TARGET_DIR/.agents"
+
+# Safe merge: copy only missing files, never overwrite
+cp -Rn "$TMP_DIR/.specs/"* "$TARGET_DIR/.specs/" 2>/dev/null || true
+cp -Rn "$TMP_DIR/.agents/"* "$TARGET_DIR/.agents/" 2>/dev/null || true
 
 # Clean up install artifacts that shouldn't be in user projects
 rm -f "$TARGET_DIR/.agents/.skill-lock.json"
